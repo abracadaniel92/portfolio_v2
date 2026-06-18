@@ -1,0 +1,67 @@
+.pillars {
+  border-top: 1px solid var(--hairline-faint);
+}
+
+.pillar {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(16px, 4vw, 64px);
+  padding: clamp(28px, 4vw, 48px) 0;
+  border-bottom: 1px solid var(--hairline-faint);
+}
+
+.pillar__no {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  margin-bottom: 10px;
+}
+.pillar__title {
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.pillar__tag {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.pillar__line {
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.55;
+  color: var(--ink-dim);
+  max-width: 60ch;
+  margin-bottom: 26px;
+}
+
+.pillar__group {
+  margin-top: 18px;
+}
+.pillar__group-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.pillar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .pillar {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

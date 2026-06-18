@@ -1,0 +1,124 @@
+.ledger {
+  border-top: 1px solid var(--hairline-faint);
+}
+
+.exp {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(16px, 4vw, 64px);
+  padding: clamp(24px, 3vw, 40px) 0;
+  border-bottom: 1px solid var(--hairline-faint);
+}
+
+.exp__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+.exp__no {
+  color: var(--signal);
+  letter-spacing: 1.5px;
+}
+.exp__dates {
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.exp__place {
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.exp__role {
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.exp__at {
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+.exp__company {
+  color: var(--signal);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.exp__company:hover {
+  border-color: var(--signal);
+  color: #f0764a;
+}
+
+.exp__note {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.exp__bullets {
+  list-style: none;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 70ch;
+}
+.exp__bullets li {
+  position: relative;
+  padding-left: 20px;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+.exp__bullets li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.ledger__more {
+  margin-top: clamp(28px, 4vw, 44px);
+  background: none;
+  border: 1px solid var(--hairline);
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.ledger__more:hover {
+  border-color: var(--steel);
+  color: var(--ink);
+}
+.ledger__more-count {
+  color: var(--signal);
+}
+
+@media (max-width: 720px) {
+  .exp {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .exp__meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
