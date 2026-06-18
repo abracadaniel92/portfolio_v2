@@ -83,47 +83,69 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 18px var(--pad);
+  gap: 19px;
+  padding: 14px var(--pad);
   border-bottom: 1px solid var(--hairline);
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 1px;
+  font-size: 12.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
-.topbar__brand,
-.topbar__menu {
+.topbar__brand {
   color: var(--ink);
 }
+.topbar__meta {
+  color: var(--ink-dim);
+}
 .topbar__menu {
-  background: none;
-  border: none;
+  color: var(--ink);
+  background: rgba(210, 64, 46, 0.08);
+  border: 1px solid var(--signal);
   font: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
   cursor: pointer;
-  padding: 0;
-  transition: color 0.2s ease;
+  padding: 5px 17px;
+  font-weight: 500;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .topbar__menu:hover {
-  color: var(--signal);
+  color: #0b0b0a;
+  background: var(--signal);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
 }
 .topbar__resume {
   background: var(--signal);
   color: #0b0b0a;
-  padding: 6px 14px;
-  margin-left: 4px;
+  border: 1px solid var(--signal);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 5px 17px;
+  margin-left: 5px;
   font-weight: 500;
   transition:
     background 0.2s ease,
+    border-color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 .topbar__resume:hover {
   background: #f0764a;
+  border-color: #f0764a;
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
+}
+.topbar__resume:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 /* ---- Menu overlay ---- */
@@ -230,9 +252,27 @@
   transform: rotate(180deg);
   white-space: nowrap;
 }
+.spine__no {
+  color: var(--signal);
+}
 
 .hero__content {
   max-width: 60ch;
+}
+
+@media (min-width: 721px) {
+  .hero__content {
+    max-width: 80ch;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1279px) {
+  .monument {
+    font-size: clamp(57.6px, 11.7vw, 169.2px);
+  }
+  .statement {
+    font-size: clamp(13.5px, 1.26vw, 17.1px);
+  }
 }
 
 .eyebrow {
@@ -320,6 +360,9 @@
   .statement {
     animation: heroRise 0.6s ease both 0.52s;
   }
+  .hero__actions {
+    animation: heroRise 0.6s ease both 0.64s;
+  }
   .baserail {
     animation: heroRise 0.6s ease both 0.66s;
   }
@@ -330,10 +373,16 @@
 
 .statement {
   margin-top: clamp(22px, 3vw, 36px);
-  max-width: 46ch;
+  max-width: none;
   font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.6;
   color: var(--ink-dim);
+}
+.statement__line {
+  display: block;
+}
+.statement__line + .statement__line {
+  margin-top: 0.15em;
 }
 .statement em {
   font-family: var(--serif);
@@ -341,6 +390,54 @@
   font-weight: 400;
   font-size: 1.18em;
   color: var(--ink);
+}
+
+/* ---- Hero CTAs ---- */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 24px);
+  margin-top: clamp(22px, 2.7vw, 36px);
+}
+.hero__btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: clamp(11px, 1.2vw, 12.5px);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: clamp(8px, 1vw, 10px) clamp(16px, 2vw, 20px);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.hero__btn--primary {
+  background: var(--signal);
+  color: #0b0b0a;
+  border: 1px solid var(--signal);
+}
+.hero__btn--primary:hover {
+  background: #f0764a;
+  border-color: #f0764a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
+}
+.hero__btn--secondary {
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--hairline);
+}
+.hero__btn--secondary:hover {
+  color: var(--ink);
+  background: rgba(232, 228, 220, 0.05);
+  border-color: var(--steel);
+  transform: translateY(-1px);
 }
 
 /* ---- Base rail ---- */
@@ -375,5 +472,11 @@
   .topbar span:nth-child(2),
   .topbar span:nth-child(3) {
     display: none;
+  }
+  .hero__actions {
+    margin-top: clamp(40px, 5vw, 66px);
+  }
+  .statement {
+    font-size: clamp(17.25px, 1.61vw, 21.85px);
   }
 }

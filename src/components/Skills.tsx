@@ -99,9 +99,15 @@ function Skills() {
             </div>
             <div className="pillar__body">
               <p className="pillar__line">{p.line}</p>
-              {p.groups.map((g) => (
+              {p.groups.map((g, i) => (
                 <div className="pillar__group" key={g.label}>
-                  <p className="pillar__group-label">{g.label}</p>
+                  <p
+                    className={`pillar__group-label pillar__group-label--${
+                      i % 2 === 0 ? "signal" : "ink"
+                    }`}
+                  >
+                    {g.label}
+                  </p>
                   <div className="pillar__chips">
                     {g.items.map((i) => (
                       <span className="tag" key={i}>

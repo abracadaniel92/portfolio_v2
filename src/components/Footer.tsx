@@ -57,7 +57,7 @@ function Footer() {
           {SOCIALS.map((s) =>
             s.download ? (
               <li key={s.label}>
-                <a href={s.href} download>
+                <a className="footer__link--resume" href={s.href} download>
                   {s.label}
                 </a>
               </li>
@@ -86,7 +86,9 @@ function Footer() {
           <span className="footer__colophon-item">
             Set in Archivo &amp; IBM Plex Mono
           </span>
-          <span className="footer__colophon-item">© 2026 · built on concrete</span>
+          <span className="footer__colophon-item footer__colophon-item--ink">
+            © 2026 · built on concrete
+          </span>
         </div>
       </div>
     </footer>

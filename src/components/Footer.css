@@ -12,17 +12,17 @@
 .footer__eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font-size: 13.2px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--ink-faint);
   margin-bottom: clamp(24px, 4vw, 40px);
 }
 .footer__mark {
-  width: 9px;
-  height: 9px;
+  width: 11px;
+  height: 11px;
   background: var(--signal);
 }
 .footer__no {
@@ -85,7 +85,10 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(16px, 3vw, 40px);
+  justify-content: space-between;
+  width: 100%;
+  max-width: 720px;
+  gap: clamp(24px, 5vw, 56px);
   margin-top: clamp(32px, 5vw, 56px);
   font-family: var(--mono);
   font-size: 12px;
@@ -97,6 +100,12 @@
 }
 .footer__links a:hover {
   color: var(--ink);
+}
+.footer__links a.footer__link--resume {
+  color: var(--signal);
+}
+.footer__links a.footer__link--resume:hover {
+  color: #f0764a;
 }
 
 .footer__colophon {
@@ -135,6 +144,10 @@
   align-items: center;
   gap: 9px;
   white-space: nowrap;
+  color: var(--ink);
+}
+.footer__colophon-item--ink {
+  color: var(--ink);
 }
 .footer__dot {
   width: 7px;
@@ -161,6 +174,12 @@
 }
 
 @media (max-width: 720px) {
+  .footer__links {
+    justify-content: flex-start;
+    max-width: none;
+    gap: clamp(16px, 4vw, 32px);
+  }
+
   .footer__colophon {
     display: flex;
     flex-direction: column;
