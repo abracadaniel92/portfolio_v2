@@ -11,10 +11,6 @@
 
 .work-row__header {
   width: 100%;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: clamp(16px, 4vw, 64px);
@@ -22,10 +18,6 @@
   padding: clamp(22px, 3vw, 38px) 0;
   color: inherit;
   font: inherit;
-  transition: padding-left 0.35s ease;
-}
-.work-row__header:hover {
-  padding-left: 14px;
 }
 
 .work-row__no {
@@ -43,9 +35,6 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--ink);
-}
-.work-row__header:hover .work-row__company {
-  color: #fff;
 }
 
 .work-row__scope {
@@ -73,8 +62,13 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--ink-dim);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
 }
-.work-row__header:hover .work-row__toggle {
+.work-row__toggle:hover {
   color: var(--signal);
 }
 .work-row__count {
@@ -91,11 +85,11 @@
     background 0.2s ease,
     color 0.2s ease;
 }
-.work-row__header:hover .work-row__toggle--feature {
+.work-row__toggle--feature:hover {
   background: var(--signal);
   color: #0b0b0a;
 }
-.work-row__header:hover .work-row__toggle--feature .work-row__count {
+.work-row__toggle--feature:hover .work-row__count {
   color: #0b0b0a;
 }
 .work-row__toggle-arrow {

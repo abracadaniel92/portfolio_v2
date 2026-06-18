@@ -297,11 +297,7 @@ function SelectedWork() {
           const isOpen = open === w.no;
           return (
             <li className="work-row" key={w.no} data-open={isOpen}>
-              <button
-                className="work-row__header"
-                aria-expanded={isOpen}
-                onClick={() => setOpen(isOpen ? null : w.no)}
-              >
+              <div className="work-row__header">
                 <span className="work-row__no">{w.no}</span>
                 <div className="work-row__main">
                   <h3 className="work-row__company">{w.company}</h3>
@@ -313,7 +309,12 @@ function SelectedWork() {
                       </span>
                     ))}
                   </div>
-                  <span className="work-row__toggle work-row__toggle--feature">
+                  <button
+                    type="button"
+                    className="work-row__toggle work-row__toggle--feature"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpen(isOpen ? null : w.no)}
+                  >
                     <span className="work-row__toggle-arrow" aria-hidden="true">
                       {isOpen ? "▾" : "▸"}
                     </span>
@@ -322,10 +323,10 @@ function SelectedWork() {
                       [{isOpen ? "−" : "+"}
                       {w.projects.length}]
                     </span>
-                  </span>
+                  </button>
                 </div>
                 <span className="work-row__year">{w.year}</span>
-              </button>
+              </div>
 
               {isOpen && (
                 <div className="work-projects">
