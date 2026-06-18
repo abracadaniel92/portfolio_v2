@@ -1,0 +1,77 @@
+/* ---- Shared section primitives ---- */
+.section {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(44px, 5vw, 80px) var(--pad);
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: clamp(28px, 3.5vw, 52px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.section__lead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.section__no {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--signal);
+}
+.section__no::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--signal);
+  flex: none;
+}
+.section__name {
+  color: var(--ink);
+}
+.section__meta {
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+/* ---- Scroll reveal (added by JS; absent under reduced motion) ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  border: 1px solid var(--hairline);
+  padding: 3px 8px;
+  white-space: nowrap;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.tag:hover {
+  border-color: var(--steel);
+  color: var(--ink);
+}
