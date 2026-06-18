@@ -73,15 +73,21 @@ function Footer() {
       </div>
 
       <div className="footer__colophon">
-        <span className="footer__status">
-          <span className="footer__dot" aria-hidden="true" />
-          Open to select work
-        </span>
-        <span>
-          Skopje {time || "—"} → wherever the work is
-        </span>
-        <span>Set in Archivo &amp; IBM Plex Mono</span>
-        <span>© 2026 · built on concrete</span>
+        <div className="footer__colophon-row">
+          <span className="footer__status">
+            <span className="footer__dot" aria-hidden="true" />
+            Open to select work
+          </span>
+          <span className="footer__colophon-item">
+            Skopje {time || "—"} → wherever the work is
+          </span>
+        </div>
+        <div className="footer__colophon-row">
+          <span className="footer__colophon-item">
+            Set in Archivo &amp; IBM Plex Mono
+          </span>
+          <span className="footer__colophon-item">© 2026 · built on concrete</span>
+        </div>
       </div>
     </footer>
   );
