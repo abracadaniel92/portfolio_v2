@@ -31,8 +31,8 @@ function Hero() {
 
       <header className="topbar">
         <span className="topbar__brand">Goce Mojsoski</span>
-        <span>Product &amp; delivery</span>
-        <span>Idx 2015–26</span>
+        <span className="topbar__meta">Product &amp; delivery</span>
+        <span className="topbar__meta">Idx 2015–26</span>
         <a
           className="topbar__resume"
           href="/files/GoceMojsoskiCV.pdf"
@@ -52,7 +52,7 @@ function Hero() {
 
       <div className="hero__body">
         <span className="spine" aria-hidden="true">
-          No. 01 / Selected work
+          <span className="spine__no">No. 01</span> / Selected work
         </span>
 
         <div className="hero__content">
@@ -74,10 +74,28 @@ function Hero() {
           </h1>
 
           <p className="statement">
-            A decade shipping products, teams &amp; <em>outcomes</em>. ERP
-            rollouts, cloud migrations and post-acquisition integrations across
-            the US &amp; Europe.
+            <span className="statement__line">
+              A decade shipping products, teams &amp; <em>outcomes</em>. ERP
+              rollouts, cloud migrations
+            </span>
+            <span className="statement__line">
+              and post-acquisition integrations across the US &amp; Europe.
+            </span>
           </p>
+
+          <div className="hero__actions">
+            <a className="hero__btn hero__btn--primary" href="#contact">
+              Contact
+            </a>
+            <a
+              className="hero__btn hero__btn--secondary"
+              href="https://koalendar.com/e/meet-with-goce"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a call ↗
+            </a>
+          </div>
         </div>
       </div>
 

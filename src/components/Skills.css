@@ -53,10 +53,21 @@
   color: var(--ink-faint);
   margin-bottom: 10px;
 }
+.pillar__group-label--signal {
+  color: var(--signal);
+}
+.pillar__group-label--ink {
+  color: var(--ink);
+}
 .pillar__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 9px;
+}
+.pillar__chips .tag {
+  font-size: 11px;
+  letter-spacing: 1.1px;
+  padding: 4px 9px;
 }
 
 @media (max-width: 760px) {
