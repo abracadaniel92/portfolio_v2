@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import "./SelectedWork.css";
 
 type Project = { name: string; desc: string; tags: string[]; href?: string };
@@ -282,6 +282,24 @@ const WORK: Work[] = [
 function SelectedWork() {
   const [open, setOpen] = useState<string | null>(null);
 
+  // When toggling a row, the row that was previously open (which may sit above
+  // the clicked one) collapses, shifting the page up and making the viewport
+  // jump. Anchor the scroll position to the clicked row so it stays put.
+  const anchorRef = useRef<{ el: HTMLElement; top: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const anchor = anchorRef.current;
+    if (!anchor) return;
+    anchorRef.current = null;
+    const delta = anchor.el.getBoundingClientRect().top - anchor.top;
+    if (delta) window.scrollBy(0, delta);
+  }, [open]);
+
+  const toggle = (no: string, isOpen: boolean, el: HTMLElement | null) => {
+    if (el) anchorRef.current = { el, top: el.getBoundingClientRect().top };
+    setOpen(isOpen ? null : no);
+  };
+
   return (
     <section className="section" id="work">
       <div className="section__head">
@@ -313,7 +331,13 @@ function SelectedWork() {
                     type="button"
                     className="work-row__toggle work-row__toggle--feature"
                     aria-expanded={isOpen}
-                    onClick={() => setOpen(isOpen ? null : w.no)}
+                    onClick={(e) =>
+                      toggle(
+                        w.no,
+                        isOpen,
+                        e.currentTarget.closest<HTMLElement>(".work-row"),
+                      )
+                    }
                   >
                     <span className="work-row__toggle-arrow" aria-hidden="true">
                       {isOpen ? "▾" : "▸"}
