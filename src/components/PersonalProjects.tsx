@@ -97,10 +97,14 @@ function PersonalProjects() {
 
   return (
     <section className="section" id="lab">
-      <div className="section__head">
+      <div className="section__head section__head--lab">
         <span className="section__lead">
           <span className="section__no">06</span>
           <span className="section__name">The lab</span>
+          <span className="section__sub-mark" aria-hidden="true">
+            •
+          </span>
+          <span className="section__sub">Things I've built myself</span>
         </span>
         <span className="section__meta">Self-hosted on a ThinkCentre</span>
       </div>

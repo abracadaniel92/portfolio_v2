@@ -1,3 +1,18 @@
+.section__head--lab .section__lead {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.section__sub-mark {
+  color: var(--signal);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.section__sub {
+  color: var(--ink);
+}
+
 .lab__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
