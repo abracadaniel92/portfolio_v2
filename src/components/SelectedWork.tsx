@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./SelectedWork.css";
 
 type Project = { name: string; desc: string; tags: string[]; href?: string };
@@ -280,25 +280,17 @@ const WORK: Work[] = [
 ];
 
 function SelectedWork() {
-  const [open, setOpen] = useState<string | null>(null);
+  // Allow any number of rows to be open at once. Opening one no longer closes
+  // another, so content above the clicked row never collapses — no scroll jump.
+  const [open, setOpen] = useState<Set<string>>(new Set());
 
-  // When toggling a row, the row that was previously open (which may sit above
-  // the clicked one) collapses, shifting the page up and making the viewport
-  // jump. Anchor the scroll position to the clicked row so it stays put.
-  const anchorRef = useRef<{ el: HTMLElement; top: number } | null>(null);
-
-  useLayoutEffect(() => {
-    const anchor = anchorRef.current;
-    if (!anchor) return;
-    anchorRef.current = null;
-    const delta = anchor.el.getBoundingClientRect().top - anchor.top;
-    if (delta) window.scrollBy(0, delta);
-  }, [open]);
-
-  const toggle = (no: string, isOpen: boolean, el: HTMLElement | null) => {
-    if (el) anchorRef.current = { el, top: el.getBoundingClientRect().top };
-    setOpen(isOpen ? null : no);
-  };
+  const toggle = (no: string) =>
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (next.has(no)) next.delete(no);
+      else next.add(no);
+      return next;
+    });
 
   return (
     <section className="section" id="work">
@@ -312,7 +304,7 @@ function SelectedWork() {
 
       <ol className="work">
         {WORK.map((w) => {
-          const isOpen = open === w.no;
+          const isOpen = open.has(w.no);
           return (
             <li className="work-row" key={w.no} data-open={isOpen}>
               <div className="work-row__header">
@@ -331,13 +323,7 @@ function SelectedWork() {
                     type="button"
                     className="work-row__toggle work-row__toggle--feature"
                     aria-expanded={isOpen}
-                    onClick={(e) =>
-                      toggle(
-                        w.no,
-                        isOpen,
-                        e.currentTarget.closest<HTMLElement>(".work-row"),
-                      )
-                    }
+                    onClick={() => toggle(w.no)}
                   >
                     <span className="work-row__toggle-arrow" aria-hidden="true">
                       {isOpen ? "▾" : "▸"}
