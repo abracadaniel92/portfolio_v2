@@ -52,7 +52,7 @@ function Hero() {
 
       <div className="hero__body">
         <span className="spine" aria-hidden="true">
-          <span className="spine__no">No. 01</span> / Selected work
+          <span className="spine__no">No. 01</span> / Intro
         </span>
 
         <div className="hero__content">

@@ -13,6 +13,10 @@ const PILLARS = [
           "Product roadmapping",
           "Backlog grooming",
           "Sprint planning",
+          "Prioritization (RICE / MoSCoW)",
+          "OKRs",
+          "Product discovery",
+          "Release management",
           "A/B testing",
           "KPI tracking",
           "Stakeholder management",
@@ -21,7 +25,11 @@ const PILLARS = [
       },
       {
         label: "Tools",
-        items: ["Jira", "Confluence", "Notion", "Miro", "Lucidchart", "GitHub Projects"],
+        items: ["Jira", "Confluence", "Notion", "Miro", "Lucidchart", "Slack", "Mattermost", "Linear", "Loom", "GitHub Projects"],
+      },
+      {
+        label: "Design",
+        items: ["Figma", "Adobe Suite", "Canva"],
       },
     ],
   },
@@ -33,15 +41,23 @@ const PILLARS = [
     groups: [
       {
         label: "Engineering",
-        items: ["Python", "SQL", "C#", "REST", "GraphQL", "Webhooks", "Snowflake", "ETL pipelines"],
+        items: ["Python", "SQL", "C#", "Bash", "PowerShell", "JavaScript", "TypeScript", "React", "HTML/CSS", "Git"],
+      },
+      {
+        label: "Data & APIs",
+        items: ["Snowflake", "ETL pipelines", "Excel / Sheets / AppScript", "REST", "GraphQL", "SOAP", "Webhooks", "Stripe", "PayPal"],
       },
       {
         label: "Platforms",
-        items: ["WordPress", "Magento", "Pimcore", "Umbraco", "Shopify", "SAP", "Dynamics 365", "Odoo"],
+        items: ["WordPress", "Magento", "Pimcore", "Umbraco", "Shopify", "SAP", "Dynamics 365", "Odoo", "HubSpot"],
       },
       {
-        label: "Automation & AI",
-        items: ["Make", "Zapier", "n8n", "Figma", "Cursor", "Claude", "Copilot"],
+        label: "Automation",
+        items: ["Make", "Zapier", "n8n", "airSlate"],
+      },
+      {
+        label: "AI",
+        items: ["Claude", "ChatGPT", "Gemini", "NotebookLM", "Cursor", "Copilot"],
       },
     ],
   },
@@ -54,11 +70,11 @@ const PILLARS = [
       { label: "Cloud", items: ["AWS", "Azure", "GCP"] },
       {
         label: "Infrastructure",
-        items: ["Docker", "Linux", "GitHub Actions", "IaC", "Caddy", "Nginx", "Tailscale", "Cloudflare"],
+        items: ["Docker", "Linux", "GitHub Actions", "IaC", "Caddy", "Nginx", "Traefik", "Coolify", "Proxmox", "Portainer", "Tailscale", "Cloudflare"],
       },
       {
         label: "Observability",
-        items: ["Datadog", "Grafana", "PagerDuty", "Uptime Kuma", "systemd timers"],
+        items: ["Datadog", "Grafana", "Prometheus", "PagerDuty", "Uptime Kuma", "Beszel", "Glance", "systemd timers"],
       },
     ],
   },
@@ -72,7 +88,7 @@ const PILLARS = [
       { label: "Security", items: ["CrowdStrike", "Proofpoint", "Fail2ban"] },
       {
         label: "Identity & access",
-        items: ["Cloudflare Zero Trust", "SSO / SAML", "IAM", "OAuth 2.0", "SOPS", "Vaultwarden"],
+        items: ["Cloudflare Zero Trust", "SSO / SAML", "IAM", "OAuth 2.0", "WireGuard", "SOPS", "Vaultwarden"],
       },
     ],
   },

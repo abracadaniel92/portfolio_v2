@@ -196,7 +196,7 @@
   padding: clamp(12px, 2vw, 22px) 0;
   border-bottom: 1px solid var(--hairline-faint);
   font-weight: 800;
-  font-size: clamp(30px, 6vw, 72px);
+  font-size: clamp(28.5px, 5.7vw, 68.4px);
   line-height: 1;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -247,7 +247,7 @@
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
