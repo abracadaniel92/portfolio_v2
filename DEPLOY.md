@@ -37,7 +37,7 @@ gmojsoski.com, www.gmojsoski.com {
         Permissions-Policy "camera=(), microphone=(), geolocation=()"
         # Content Security Policy — tuned to what this site actually loads:
         # self for scripts/img, Google Fonts for CSS+fonts, data: for the SVG grain
-        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+        Content-Security-Policy "default-src 'self'; script-src 'self' https://analytics.gmojsoski.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://analytics.gmojsoski.com; connect-src 'self' https://analytics.gmojsoski.com; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         -Server
     }
 
@@ -53,8 +53,10 @@ Notes on the CSP:
 - `style-src` needs `'unsafe-inline'` because the build inlines some styles and
   the components use inline `style=` attributes. Fonts come from Google.
 - `img-src` needs `data:` for the inline SVG film-grain texture.
-- If GoatCounter analytics is re-added later (see below), extend `script-src`
-  and `connect-src` with the analytics origin.
+- `https://analytics.gmojsoski.com` appears in `script-src` (count.js),
+  `connect-src` (sendBeacon hit), and `img-src` (image-fallback hit) for the
+  self-hosted GoatCounter snippet in `index.html`. Removing analytics means
+  removing the snippet AND these three CSP entries.
 
 Reload: `caddy reload --config /etc/caddy/Caddyfile`.
 
@@ -74,12 +76,17 @@ Reload: `caddy reload --config /etc/caddy/Caddyfile`.
 those three and regenerate `og-image.png` if the hero changed
 (`node` + `sharp`, see `scripts/gen-favicons.mjs` for the pattern).
 
-## Optional: analytics
+## Analytics
 
-The previous site used self-hosted GoatCounter at
-`https://analytics.gmojsoski.com`. It was intentionally left out of this build.
-To re-add, drop the count.js snippet before `</body>` in `index.html` and widen
-the CSP `script-src`/`connect-src` to include `https://analytics.gmojsoski.com`.
+Self-hosted GoatCounter at `https://analytics.gmojsoski.com` (runs on the
+homelab, see the `lenovo-homelab` repo). The count.js snippet sits before
+`</body>` in `index.html`; the CSP above allows the origin. The snippet is a
+plain external `<script>` (no inline JS — the CSP has no `'unsafe-inline'`
+for scripts). Ad blockers will silently drop it; that's expected.
+
+**Deploy-order note:** the live Caddy CSP header must be widened BEFORE (or
+with) deploying the site build that contains the snippet, otherwise the
+browser blocks count.js and hits are lost until Caddy reloads.
 
 ## Rollback
 
