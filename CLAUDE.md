@@ -24,6 +24,12 @@ that aren't obvious from it.
 clean before any change is done. There are no tests; the ESLint config
 includes `react-hooks` rules and they are treated as errors.
 
+For visual/interaction changes, also verify in a browser (the build passing does
+not prove behavior). Note: Vite 8 ignores an injected `PORT` and auto-increments
+if its port is busy (5173 → 5174 → 5175…), so a fixed-port preview proxy can end
+up pointing at nothing. Read the actual `Local:` URL from the Vite startup log and
+drive that.
+
 ## Hard rules
 
 1. **No em-dashes in copy.** Periods, colons, or en-dashes for ranges. This
@@ -64,6 +70,14 @@ includes `react-hooks` rules and they are treated as errors.
   Never hand-edit the PNG/ICO outputs.
 
 ## Skills available
+
+`.claude/skills/brutalist-style/` — the design-system + code-convention guardian.
+Use it for **any** UI change: new section/component, editing `.tsx`/`.css` under
+`src/`, layout/type/spacing/color tweaks, copy or data edits, or new animations.
+It encodes the token palette, section scaffolding, mono-label system, motion
+opt-in, and the file/data conventions, with concrete specs in its
+`reference/tokens.md` and `reference/new-component.md`. Run its self-check before
+finishing UI work.
 
 `.claude/skills/security-reviewer/` — AppSec review skill (already run once;
 repo was clean). Re-run it if you add anything that touches external input,

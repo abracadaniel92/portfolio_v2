@@ -1,0 +1,54 @@
+.to-top {
+  position: fixed;
+  right: 14px;
+  bottom: 24px;
+  z-index: 40;
+  padding: 7px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+}
+
+/* Hidden over the hero and over the footer; visible through the middle */
+.to-top {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+}
+.to-top--shown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+.to-top:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .to-top {
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0.45s,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+}
+
+/* Clear the fixed right rail once it appears (>=1280px) */
+@media (min-width: 1280px) {
+  .to-top {
+    right: 46px;
+  }
+}

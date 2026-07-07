@@ -7,6 +7,7 @@ import Skills from "./components/Skills";
 import PersonalProjects from "./components/PersonalProjects";
 import Footer from "./components/Footer";
 import Rails from "./components/Rails";
+import ScrollTop from "./components/ScrollTop";
 import "./App.css";
 
 const REVEAL_SELECTOR =
@@ -71,6 +72,7 @@ function App() {
       <Skills />
       <PersonalProjects />
       <Footer />
+      <ScrollTop />
     </>
   );
 }
