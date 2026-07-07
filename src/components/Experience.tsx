@@ -50,7 +50,7 @@ const ROLES: Role[] = [
   },
   {
     no: "03",
-    role: "Product Program Management Consultant",
+    role: "Product & Program Management Consultant",
     company: "TSD Digital",
     place: "Herefordshire, UK",
     dates: "Jul 2024 – Sep 2025",
