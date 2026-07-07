@@ -115,9 +115,26 @@
   margin-bottom: clamp(24px, 3vw, 36px);
 }
 .wp {
+  display: block;
   padding: 16px 18px;
   border-right: 1px solid var(--hairline-faint);
   border-bottom: 1px solid var(--hairline-faint);
+}
+/* Whole card is the link when the project has a live site */
+.wp--link {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.wp--link:hover {
+  background: rgba(210, 64, 46, 0.06);
+}
+.wp--link:hover .wp__name,
+.wp--link:hover .wp__link {
+  color: var(--signal);
+}
+.wp--link:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
 }
 .wp__top {
   display: flex;
@@ -130,14 +147,13 @@
   font-size: 15px;
   letter-spacing: -0.01em;
   color: var(--ink);
+  transition: color 0.2s ease;
 }
 .wp__link {
   font-family: var(--mono);
   color: var(--ink-faint);
   flex: none;
-}
-.wp__link:hover {
-  color: var(--signal);
+  transition: color 0.2s ease;
 }
 .wp__desc {
   margin-top: 8px;

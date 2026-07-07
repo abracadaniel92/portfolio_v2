@@ -22,9 +22,19 @@ const WORK: Work[] = [
     year: "2025",
     projects: [
       {
-        name: "Super Admin Panel",
-        desc: "Cross-tenant admin console, shipped across both teams.",
-        tags: [".NET", "Angular", "SQL", "Security"],
+        name: "AXM API platform",
+        desc: "Lead the team owning the server-side platform, its APIs, and domain data.",
+        tags: [".NET", "CQRS", "Public API", "Security"],
+      },
+      {
+        name: "Cloud tenancy platform",
+        desc: "Lead the team owning multi-tenancy: data isolation, onboarding, and project-based access.",
+        tags: ["Multi-tenancy", "Cloud", "Data isolation"],
+      },
+      {
+        name: "SuperAdmin platform",
+        desc: "Led the SuperAdmin platform (identity, provisioning, licensing) until all work was delivered.",
+        tags: ["IAM", ".NET", "SQL", "Provisioning"],
       },
       {
         name: "Client service desk",
@@ -340,31 +350,43 @@ function SelectedWork() {
 
               {isOpen && (
                 <div className="work-projects">
-                  {w.projects.map((p) => (
-                    <div className="wp" key={p.name}>
-                      <div className="wp__top">
-                        <span className="wp__name">{p.name}</span>
-                        {p.href && (
-                          <a
-                            className="wp__link"
-                            href={p.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            ↗
-                          </a>
-                        )}
+                  {w.projects.map((p) => {
+                    const body = (
+                      <>
+                        <div className="wp__top">
+                          <span className="wp__name">{p.name}</span>
+                          {p.href && (
+                            <span className="wp__link" aria-hidden="true">
+                              ↗
+                            </span>
+                          )}
+                        </div>
+                        <p className="wp__desc">{p.desc}</p>
+                        <div className="wp__tags">
+                          {p.tags.map((t) => (
+                            <span className="wp__tag" key={t}>
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </>
+                    );
+                    return p.href ? (
+                      <a
+                        className="wp wp--link"
+                        key={p.name}
+                        href={p.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      <div className="wp" key={p.name}>
+                        {body}
                       </div>
-                      <p className="wp__desc">{p.desc}</p>
-                      <div className="wp__tags">
-                        {p.tags.map((t) => (
-                          <span className="wp__tag" key={t}>
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </li>
