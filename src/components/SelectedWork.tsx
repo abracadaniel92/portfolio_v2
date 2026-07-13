@@ -378,9 +378,14 @@ function SelectedWork() {
                 <span className="work-row__year">{w.year}</span>
               </div>
 
-              {isOpen && (
-                <div className="work-projects">
-                  {w.projects.map((p) => {
+              {/* Always rendered so crawlers and no-JS readers see the work;
+                  visually collapsed until the row is expanded. */}
+              <div
+                className={
+                  isOpen ? "work-projects" : "work-projects work-projects--collapsed"
+                }
+              >
+                {w.projects.map((p) => {
                     const body = (
                       <>
                         <div className="wp__top">
@@ -417,8 +422,7 @@ function SelectedWork() {
                       </div>
                     );
                   })}
-                </div>
-              )}
+              </div>
             </li>
           );
         })}

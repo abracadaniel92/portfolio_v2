@@ -10,8 +10,10 @@ const STATS = [
 
 function Capacity() {
   const statsRef = useRef<HTMLDivElement>(null);
+  // Server render (no window) emits the final numbers so prerendered HTML is
+  // real content; the client hydrates that, then counts up from the effect.
   const [vals, setVals] = useState<number[]>(() =>
-    typeof window !== "undefined" &&
+    typeof window === "undefined" ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches
       ? STATS.map((s) => s.value)
       : STATS.map(() => 0)
@@ -82,7 +84,7 @@ function Capacity() {
         <div className="stats" ref={statsRef}>
           {STATS.map((s, i) => (
             <div className="stat" key={s.label}>
-              <span className="stat__num">
+              <span className="stat__num" suppressHydrationWarning>
                 {s.prefix}
                 {vals[i]}
                 {s.suffix}

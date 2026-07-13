@@ -114,6 +114,10 @@
   border-left: 1px solid var(--hairline-faint);
   margin-bottom: clamp(24px, 3vw, 36px);
 }
+/* Kept in the HTML for crawlers and no-JS readers; hidden until the row opens. */
+.work-projects--collapsed {
+  display: none;
+}
 .wp {
   display: block;
   padding: 16px 18px;

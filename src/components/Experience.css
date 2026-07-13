@@ -10,6 +10,12 @@
   border-bottom: 1px solid var(--hairline-faint);
 }
 
+/* Earlier roles stay in the HTML (so crawlers and no-JS readers see the full
+   history) but are hidden until the "Show earlier roles" button expands them. */
+.exp--collapsed {
+  display: none;
+}
+
 .exp__meta {
   display: flex;
   flex-direction: column;

@@ -112,9 +112,10 @@ const ROLES: Role[] = [
   },
 ];
 
+const INITIAL_COUNT = 4;
+
 function Experience() {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? ROLES : ROLES.slice(0, 4);
 
   return (
     <section className="section" id="experience">
@@ -127,8 +128,13 @@ function Experience() {
       </div>
 
       <div className="ledger">
-        {visible.map((r) => (
-          <article className="exp" key={r.no}>
+        {ROLES.map((r, i) => (
+          <article
+            className={
+              !showAll && i >= INITIAL_COUNT ? "exp exp--collapsed" : "exp"
+            }
+            key={r.no}
+          >
             <div className="exp__meta">
               <span className="exp__no">{r.no}</span>
               <span className="exp__dates">{r.dates}</span>
@@ -160,7 +166,9 @@ function Experience() {
       {!showAll && (
         <button className="ledger__more" onClick={() => setShowAll(true)}>
           Show earlier roles
-          <span className="ledger__more-count">[+{ROLES.length - 4}]</span>
+          <span className="ledger__more-count">
+            [+{ROLES.length - INITIAL_COUNT}]
+          </span>
         </button>
       )}
     </section>

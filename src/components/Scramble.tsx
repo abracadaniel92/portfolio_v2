@@ -10,8 +10,12 @@ const prefersReduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function Scramble({ text, className, delay = 0 }: Props) {
+  // Server render (no window) emits the resolved text so prerendered HTML is
+  // real content; the client hydrates that, then scrambles from the effect.
   const [out, setOut] = useState(() =>
-    prefersReduced() ? text : text.replace(/[^ ]/g, "·")
+    typeof window === "undefined" || prefersReduced()
+      ? text
+      : text.replace(/[^ ]/g, "·")
   );
 
   useEffect(() => {
@@ -45,7 +49,11 @@ function Scramble({ text, className, delay = 0 }: Props) {
     };
   }, [text, delay]);
 
-  return <span className={className}>{out}</span>;
+  return (
+    <span className={className} suppressHydrationWarning>
+      {out}
+    </span>
+  );
 }
 
 export default Scramble;
