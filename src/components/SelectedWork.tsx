@@ -66,6 +66,36 @@ const WORK: Work[] = [
         desc: "Moved 100+ microservices to Spring Boot 3 and modernised pipelines.",
         tags: ["Java", "100+ services"],
       },
+      {
+        name: "AWS cost reduction $5M → $3M",
+        desc: "Led the SRE team cutting the yearly AWS budget 40% through continuous cost monitoring and reserved instances, with no performance hit.",
+        tags: ["AWS", "SRE", "FinOps"],
+      },
+      {
+        name: "Quarterly tech roadmap",
+        desc: "Owned the quarterly technology roadmap for the whole engineering org, consumed by leadership and delivery teams alike.",
+        tags: ["Roadmap", "Leadership", "Planning"],
+      },
+      {
+        name: "Epic capitalization",
+        desc: "Classified engineering effort as capitalizable R&D with finance, feeding the yearly tax audit.",
+        tags: ["Finance", "R&D", "Audit"],
+      },
+      {
+        name: "AI tool spend monitoring",
+        desc: "Unified Claude, Cursor and Copilot spend into one view from vendor dashboards and exported reports.",
+        tags: ["AI", "Cost", "Reporting"],
+      },
+      {
+        name: "InfoSec & SRE service desks",
+        desc: "Created and maintained service desks for the InfoSec and SRE teams, standardising intake and triage.",
+        tags: ["Service desk", "Jira", "InfoSec"],
+      },
+      {
+        name: "Security alert automation",
+        desc: "Automated CrowdStrike and other InfoSec alerts into tracked Jira tickets for faster response.",
+        tags: ["CrowdStrike", "Jira", "Automation"],
+      },
     ],
   },
   {
