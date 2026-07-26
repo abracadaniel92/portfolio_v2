@@ -3,6 +3,11 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
+// Prerendered HTML has full page height at first paint, so the browser would
+// restore the previous scroll position on reload (landing below the topbar on
+// mobile). Always open at the top; hash-fragment scrolling is unaffected.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
 const container = document.getElementById('root')!
 const app = (
   <StrictMode>

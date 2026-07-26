@@ -46,6 +46,15 @@
   }
 }
 
+/* Narrower on mobile (trim left/right, keep height) so it clears the
+   footer's GitHub link. */
+@media (max-width: 720px) {
+  .to-top {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}
+
 /* Clear the fixed right rail once it appears (>=1280px) */
 @media (min-width: 1280px) {
   .to-top {
