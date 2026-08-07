@@ -36,20 +36,41 @@ engineer would have caught it in a PR review. I catch it by having
 written myself a reminder, which is the entire difference in one
 sentence.
 
-[TODO: a second example from a service other than the portfolio.
-Nextcloud on `cloud.gmojsoski.com` is the obvious candidate, and the
-sharpest version of the question is whether you have ever actually
-restored from that backup rather than assuming it works. An untested
-restore is the canonical form of this argument, and unlike the tunnel
-replicas and the lockfile commit, it isn't already carrying two other
-posts.]
+Bitwarden is the one that would actually hurt. Nobody else uses that
+vault, so the blast radius really does stop at me, which is the
+condition I set for putting anything on this box at all. The backup
+runs automatically onto drives in that same box, and a weekly copy
+goes to Backblaze. I have confirmed that any of it actually restores
+exactly once.
 
-[TODO: a third example where the gap went unclosed, or got found late.
-Every case in this section is currently "I noticed the seam", which
-quietly flatters the argument. One instance where being the only
-on-call engineer meant something broke and stayed broken for a while
-would make the claim honest rather than tidy, and it is the strongest
-thing this post could contain.]
+Both halves of that are worth looking at directly. The copy I would
+reach for first lives inside the machine it is protecting, which means
+it covers me for deleting something by accident and for nothing else.
+The copy that would survive the machine is up to seven days old, so
+the real question is not whether I lose the vault but how much of a
+week I am willing to lose with it. Neither of those is a mistake
+exactly. They are just what I chose, and I only know I chose them
+because there was no one else to choose for me.
+
+The restore is the part I would actually defend least. An automated
+backup is a process that runs. A tested restore is evidence the
+process produces something usable. I have a great deal of the first
+and one instance of the second, and the distance between them stays
+invisible until the single day it is the only thing that matters. A
+hosted password manager makes verifying that somebody else's full-time
+job. They do it continuously, whether or not anyone asks, and running
+my own is the only reason I have ever had to think about the
+difference at all.
+
+Then there is the one that actually broke. A Raspberry Pi running
+Pi-hole handled DNS for the entire house. When the Pi died, nobody
+living here could reach anything. Not a slow page or a degraded
+service: no internet, for everyone, until I got to it. Nobody else in
+the house could have fixed it, and more to the point, nobody else
+could have diagnosed it. The symptom was "the internet is broken",
+which points a reasonable person at their router or their ISP, not at
+a dead single-board computer on a shelf doing a job they never knew
+was being done.
 
 ## What I'd actually narrow this to
 
@@ -62,10 +83,23 @@ another team's data, anything with a support obligation to a third
 party: none of that belongs on a shelf with one on-call engineer, and I
 wouldn't put it there.
 
-What belongs there is exactly what's there now: a portfolio site, a
-personal cloud, and a handful of services where the cost of me being
-the single point of failure is that I'm inconvenienced, not that
-someone else is. The seams I keep finding are not homelab problems.
-They exist on every platform. Managed infrastructure just pays someone
-else to notice them first. Running my own means I notice them, or
-nobody does.
+What belongs there is most of what's there now: a portfolio site, a
+personal cloud, a password vault whose blast radius genuinely does stop
+at me. DNS was the exception, and I had it wrong for as long as it ran
+that way. Putting name resolution for a household on one Raspberry Pi
+took a service everyone depends on and gave it a single point of
+failure only one person could even identify, which is exactly the
+arrangement I just spent this whole post arguing against.
+
+It is still one Pi. I have not built a fallback, and the only thing
+that has genuinely changed is that I recognize the symptom now: when
+the house says the internet is down, I check the Pi before I check
+anything else. That is a faster diagnosis, not a fix. The single point
+of failure sits exactly where it always sat, and the improvement is
+entirely in my head.
+
+That is the part worth keeping. The seams I keep finding are not
+homelab problems. They exist on every platform. Managed infrastructure
+just pays someone else to notice them first. Running my own means I
+notice them, or nobody does, and sometimes it means I notice them from
+the other side of a house where nothing loads.
