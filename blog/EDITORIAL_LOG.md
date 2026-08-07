@@ -12,6 +12,15 @@ infra whenever that exists.
 - text-checker-en: glossed "hydration mismatch" on first use (it was used
   before it was ever explained). Fixed ambiguous "Prerendering that gives
   you" -> "Prerendering that state gives you".
+- Correction (reader-caught, 2026-08-08): the hydration-mismatch gloss added
+  during the text-checker-en pass introduced a false claim: "deletes
+  dist/server ... [so] no hydration mismatch ... is possible from a file
+  that never reaches the browser." Deleting a build-time-only SSR bundle has
+  no bearing on hydration mismatches, and lines 69-72 already describe a
+  real one (Scramble/Capacity needed suppressHydrationWarning because the
+  client's first paint legitimately differs from the server's). Removed the
+  false claim rather than patching it; the actual phenomenon was already
+  correctly explained later without needing the term.
 
 ## homelab-deploy.md
 

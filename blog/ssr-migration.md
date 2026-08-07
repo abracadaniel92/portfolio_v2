@@ -24,11 +24,10 @@ Three of those steps are Vite doing what Vite already does: type-check,
 build the client bundle, build a second bundle from an SSR entry point.
 The fourth step is a 28-line script. It imports the compiled
 `entry-server.js`, calls `renderToString` on the app, and does a string
-replace of the root div's contents in `dist/index.html`. Then it deletes
-`dist/server` entirely, because the SSR bundle is a build artifact, not
-something that ships. That also means no hydration mismatch, the
-server and client disagreeing about what the page should look like on
-first paint, is possible from a file that never reaches the browser.
+replace of the root div's contents in `dist/index.html`. Then it
+deletes `dist/server` entirely: that bundle only ever runs once,
+during the build, to produce that string. It never runs in a browser,
+so there's nothing to ship it for.
 
 That part was the easy 40 lines: an `entry-server.tsx` that renders
 `<App />` inside `renderToString`, and the prerender script that wires it
