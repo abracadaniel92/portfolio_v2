@@ -79,6 +79,20 @@ opt-in, and the file/data conventions, with concrete specs in its
 `reference/tokens.md` and `reference/new-component.md`. Run its self-check before
 finishing UI work.
 
+`.claude/skills/blog-post-writer/` — writing craft for blog posts and notes:
+the four archetypes (build writeup, delivery lesson, position piece, short note),
+the voice floor, and the editing pass. Covers what a post **says**. Its
+`reference/archetypes.md` has the spines and word budgets, `reference/voice.md`
+the register calibration. Scoped to prose only; blog infrastructure does not
+exist in this repo yet (see the open item below).
+
+`.claude/skills/text-checker-en/` — English-only line editor: mechanics,
+comprehension, flow, the AI-tell blocklist, plain-language swaps. Covers how
+prose **reads**, and outputs a report plus a full rewrite. Adapted from the
+multilingual `text-checker` in `../product_manager_skills/`. Run it after
+`blog-post-writer` on a draft, or standalone on any English prose. The AI-tell
+blocklist lives here and only here; don't duplicate it into the other skill.
+
 `.claude/skills/security-reviewer/` — AppSec review skill (already run once;
 repo was clean). Re-run it if you add anything that touches external input,
 storage, or third-party scripts (e.g. re-adding GoatCounter analytics — and

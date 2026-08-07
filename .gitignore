@@ -12,8 +12,11 @@ dist
 dist-ssr
 *.local
 
-# Local Claude Code config + bundled third-party skill (not part of the site)
-.claude/
+# Local Claude Code config. Skills ARE tracked on purpose so they travel with the
+# repo to other machines; everything else under .claude/ is machine-specific
+# (launch.json holds absolute local paths) and stays local.
+.claude/*
+!.claude/skills/
 
 # Editor directories and files
 .vscode/*
