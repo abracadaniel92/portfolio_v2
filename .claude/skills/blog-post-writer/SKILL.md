@@ -39,6 +39,11 @@ slugs, or the build. Blog infrastructure does not exist in this repo yet.
 5. **Open on a specific.** The first two sentences must carry a fact or a claim.
    No scene-setting, no "recently I've been thinking about". If the draft opens
    with context, the real opening is usually paragraph two.
+6. **Titles name the concrete thing.** The tool, the system, the number, or the
+   actual claim. Making a title more scannable means moving the subject earlier,
+   never trading the subject for a generic frame. Watch for "What X actually
+   teaches you", "Lessons from Y", and "A deep dive into Z": they scan fine and
+   say nothing, and search rewards the specific noun anyway.
 
 ## The four archetypes
 
@@ -46,11 +51,11 @@ Pick one before drafting and commit to its spine. A post that is two archetypes
 at once is the most common structural failure. Full spines, length targets, and a
 worked example each are in `reference/archetypes.md`.
 
-- **Build writeup** (800 to 1500 words). How something was built, fixed, or
+- **Build writeup** (500 to 1500 words). How something was built, fixed, or
   migrated. Spine: what I wanted → what I tried first → the tradeoff → what
   actually happened → what I would do differently. The homelab, the SSR
   prerender, a database upgrade.
-- **Delivery lesson** (700 to 1200 words). What worked and what did not, leading
+- **Delivery lesson** (600 to 1200 words). What worked and what did not, leading
   teams and programs. Spine: the situation with real numbers → what I believed
   going in → what actually happened → the lesson as a rule → where the rule
   breaks. Needs stakes to work.
@@ -58,7 +63,7 @@ worked example each are in `reference/archetypes.md`.
   claim inside the first 100 words → why the opposing view is reasonable →
   the evidence → the strongest objection, answered honestly → what to do
   instead. Never skip the steelman.
-- **Short note** (150 to 400 words). One thing. A result, a tool, a thing
+- **Short note** (up to 400 words, no floor). One thing. A result, a tool, a thing
   learned. Result first, context second, and **no concluding paragraph**. Low
   ceremony is the point. Publish these often; they are what keeps a blog alive.
 
@@ -128,6 +133,13 @@ publishable post.
 - **The Consistency Seam.** The looser blog voice drifts so far that the post and
   the site read as two different people. *Fix:* the voice floor above is the
   hard boundary. Warmer is fine. Marketing register never is.
+- **Recycled Evidence.** A post built out of anecdotes that are already carrying
+  other posts. Anyone reading the blog in order meets the same story three
+  times, and a position piece whose evidence is borrowed has not earned its
+  claim. *Fix:* before drafting, list the specifics each existing post already
+  owns. New post, new evidence. Where an old example genuinely is the best one,
+  compress it to a sentence and point at the post that tells it properly,
+  instead of narrating it again at length.
 - **Archetype Collision.** A build writeup that turns into a position piece
   halfway down. The reader cannot tell what they are reading. *Fix:* split it.
   Two focused posts beat one confused one, and you needed a second post anyway.

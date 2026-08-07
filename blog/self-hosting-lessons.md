@@ -1,4 +1,4 @@
-# What self-hosting a homelab actually teaches you
+# Self-hosting a homelab made every gap in my own resilience impossible to ignore
 
 Running my own infrastructure hasn't made me better at handling failure
 in general. What it's done is make every place I'm not resilient
@@ -26,31 +26,30 @@ on a plane. No amount of tooling changes who picks up the phone.
 
 ## Where that shows up, specifically
 
-I added dual tunnel replicas to the Cloudflare Tunnel setup that fronts
-the homelab because a single tunnel is a single point of failure and
-there's no on-call rotation behind this box to catch it if the process
-dies. A managed load balancer gives you that redundancy by default,
-and you never have to think about it. Here, someone has to notice the
-gap before it gets closed, and that someone is me.
-
-The site's own deploy pipeline is the clearer example. The
-Content-Security-Policy header lives in a Caddyfile on the server;
-the script tag that needs it lives in the app repo. Nothing connects
+The clearest case is one I wrote up on its own: this site's
+Content-Security-Policy header lives in a Caddyfile on the server, the
+script tag that needs it lives in the app repo, and nothing connects
 them except a paragraph in `DEPLOY.md` telling me to update both at
-once. On a managed platform, that coupling either doesn't exist or is
-enforced by the platform's own config surface. Here, the seam is real,
-and I know it's real specifically because I'm the one who has to
-remember it's there. A team with a platform engineer would have caught
-this in a PR review. I catch it by having written the reminder to
-myself.
+once. On a managed platform that coupling either doesn't exist or is
+enforced by the platform's own config surface. A team with a platform
+engineer would have caught it in a PR review. I catch it by having
+written myself a reminder, which is the entire difference in one
+sentence.
 
-Same shape with the build itself: the lockfile has to match whatever
-Node and npm versions happen to be installed on that specific machine
-right now. A commit exists in the portfolio's history purely to
-re-sync `package-lock.json` after the server's Node version moved. The
-real point of that commit has nothing to do with Node: when there's no
-CI abstraction between the code and the metal, every version mismatch
-becomes personally mine to notice.
+[TODO: a second example from a service other than the portfolio.
+Nextcloud on `cloud.gmojsoski.com` is the obvious candidate, and the
+sharpest version of the question is whether you have ever actually
+restored from that backup rather than assuming it works. An untested
+restore is the canonical form of this argument, and unlike the tunnel
+replicas and the lockfile commit, it isn't already carrying two other
+posts.]
+
+[TODO: a third example where the gap went unclosed, or got found late.
+Every case in this section is currently "I noticed the seam", which
+quietly flatters the argument. One instance where being the only
+on-call engineer meant something broke and stayed broken for a while
+would make the claim honest rather than tidy, and it is the strongest
+thing this post could contain.]
 
 ## What I'd actually narrow this to
 
@@ -66,9 +65,7 @@ wouldn't put it there.
 What belongs there is exactly what's there now: a portfolio site, a
 personal cloud, and a handful of services where the cost of me being
 the single point of failure is that I'm inconvenienced, not that
-someone else is. The seams I keep finding, the CSP living in a
-different repo than the code that needs it, the lockfile tied to one
-machine's installed versions, the tunnel with no rotation behind it,
-are seams that exist on every platform. Managed infrastructure just
-pays someone else to notice them first. Running my own means I notice
-them, or nobody does.
+someone else is. The seams I keep finding are not homelab problems.
+They exist on every platform. Managed infrastructure just pays someone
+else to notice them first. Running my own means I notice them, or
+nobody does.

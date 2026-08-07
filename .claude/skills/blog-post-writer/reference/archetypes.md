@@ -12,7 +12,12 @@ two reads as confusion.
 there is a technical decision worth explaining. The homelab, the SSR prerender,
 a database upgrade, a Caddy config that took three attempts.
 
-**Budget:** 800 to 1500 words.
+**Budget:** 500 to 1500 words. The 500 to 800 band is a lean build writeup and
+is a legitimate finished shape, not a draft that stopped early. Reach it by
+having spent the material, never by cutting the tradeoff section. If a post
+lands under 500, the missing piece is almost always step 3: there was no real
+alternative considered, which means it is a short note wearing a spine it did
+not earn. Never pad to hit a number. A padded 900 costs more than an honest 600.
 
 ### Spine
 
@@ -55,7 +60,7 @@ Nobody needs another walkthrough. They need to know what you chose and why.
 differently than expected, and the gap is instructive. Needs real stakes:
 headcount, money, deadlines, a decision that could have gone badly.
 
-**Budget:** 700 to 1200 words.
+**Budget:** 600 to 1200 words.
 
 ### Spine
 
@@ -129,7 +134,9 @@ cannot, you do not understand the position well enough to argue against it.
 This is the highest-value archetype because it is the one that gets published.
 A blog dies of unfinished long-form, never of too many short notes.
 
-**Budget:** 150 to 400 words. Under 100 is fine.
+**Budget:** up to 400 words, and there is no floor. If the whole thing fits in
+80 words, 80 words is the post. Length is the one quality a note is never
+allowed to acquire on purpose.
 
 ### Spine
 

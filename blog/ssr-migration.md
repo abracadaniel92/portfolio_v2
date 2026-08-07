@@ -35,7 +35,7 @@ into the existing HTML template. The actual work was somewhere else.
 
 ## Finding every place content was hiding
 
-Three components had to change, and none of them for the SSR plumbing
+Four components had to change, and none of them for the SSR plumbing
 itself. They changed because each one used a pattern that works fine for
 click-driven UI and is quietly wrong for anything that needs to exist in
 the initial HTML.
@@ -85,7 +85,7 @@ checking `container.hasChildNodes()`.
 
 Writing `entry-server.tsx` and `prerender.mjs` took an afternoon and
 no new dependencies, since `react-dom/server` already ships inside
-`react-dom`. Finding the three components that were quietly deleting
+`react-dom`. Finding the four components that were quietly deleting
 real content from the DOM until a click or an effect fired took longer,
 because each one looked correct in isolation. `isOpen &&` reads as
 normal React. A feature-detection check for `window` reads as

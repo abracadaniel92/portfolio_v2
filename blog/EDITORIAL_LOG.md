@@ -21,6 +21,18 @@ infra whenever that exists.
   client's first paint legitimately differs from the server's). Removed the
   false claim rather than patching it; the actual phenomenon was already
   correctly explained later without needing the term.
+- Correction (review pass, 2026-08-08): "Three components had to change"
+  and "the three components that were quietly deleting real content" were
+  both wrong. `git show e3b0dbf --stat` confirms four changed component
+  files (SelectedWork, Experience, Scramble, Capacity); the closing line
+  already said "Four components". Both instances corrected to four. Note
+  the error survived a full text-checker-en pass because Phase 0's
+  consistency check reads spellings of the same term, not counts that
+  contradict each other across sections.
+- Verified against the repo this pass, all accurate: `prerender.mjs` is
+  exactly 28 lines, `INITIAL_COUNT = 4`, `work-projects--collapsed` and
+  `exp--collapsed` both exist, `suppressHydrationWarning` is present in
+  Capacity.tsx and Scramble.tsx.
 
 ## homelab-deploy.md
 
@@ -29,6 +41,12 @@ infra whenever that exists.
 - text-checker-en: fixed a garden-path sentence, "widen the header first,
   or with, the deploy" -> "widen the header before, or alongside, the
   deploy".
+- Review pass (2026-08-08): deleted the closing paragraph. It restated
+  line 54's "a paragraph is easy to skip under pressure" almost verbatim
+  as "paragraphs get skipped under pressure", which is the Tidy Ending
+  pitfall. The post now ends on "A half-remembered runbook can be
+  confidently wrong, which is worse than having none", which was always
+  the stronger close. Word count 636 -> 597.
 
 ## self-hosting-lessons.md
 
@@ -40,6 +58,27 @@ infra whenever that exists.
 - Structural: the "X, not Y" antithesis construction was overused as a
   rhetorical tic (6+ instances across drafting passes). Trimmed to one
   deliberate instance per the blog-post-writer voice floor.
+- Title reverted (2026-08-08): back to "Self-hosting a homelab made every
+  gap in my own resilience impossible to ignore". The SEO retitle traded
+  the subject for a generic frame ("What X actually teaches you"), which
+  scans fine and says nothing. Skimmability is fixed instead by putting
+  the concrete subject first. A title rule now exists in the
+  blog-post-writer voice floor so this doesn't recur.
+- Structural, the significant one (2026-08-08): all three examples in
+  "Where that shows up, specifically" were borrowed from other posts in
+  this same batch. Dual tunnel replicas is the centerpiece of
+  cloudflare-tunnel-zero-trust.md; the CSP/Caddyfile seam and the
+  lockfile-vs-Node-version commit are both from homelab-deploy.md. A
+  position piece earns its claim in the evidence section, and this one
+  borrowed all of it. Kept the CSP case (compressed, now explicitly
+  pointing at the post that tells it properly) and replaced the other two
+  with `[TODO: ...]` markers rather than inventing incidents.
+- The second marker asks for a case where the gap went unclosed or was
+  found late. Every example in the section was "I noticed the seam",
+  which flatters the argument. Unresolved: the post should not publish
+  until at least the second marker is answered.
+- Closing paragraph also re-listed the three borrowed examples; trimmed
+  to "The seams I keep finding are not homelab problems."
 
 ## grouper-to-ananas-migration.md
 
@@ -107,6 +146,22 @@ infra whenever that exists.
   phrasings in the piece are plain scope-clarifying negation, not the
   rhetorical antithesis tic, so left as is.
 - Word count: 219.
+- Review pass (2026-08-08): cut to one subject. At 219 words it was in
+  range but covered four things (the tool comparison, why self-host at
+  all, the snippet dropping during the brutalist rebuild, ad blockers),
+  which breaks the short note's one-thing rule. Removed the "full control
+  and privacy" paragraph (meta, and the vaguest thing in the piece) and
+  the rebuild-history sentence. Kept the ad-blocker caveat: it is the
+  honest cost of the same decision, not a second subject. 219 -> 129.
+- That result exposed a contradiction in the skill: the short note budget
+  read "150 to 400 words" and then "Under 100 is fine" two lines later,
+  and its own worked example is 79 words. The floor was never real. Budget
+  is now stated as "up to 400 words, no floor", which is what the skill
+  always actually meant.
+- Spun out: the analytics snippet disappearing during the rebrand and
+  quietly coming back is a genuine short note of its own, if the reason
+  it was dropped turns out to be more interesting than "a rebuild didn't
+  carry everything over on day one".
 
 ## cloudflare-tunnel-zero-trust.md
 
@@ -125,6 +180,39 @@ infra whenever that exists.
   down (both replicas share it). "No downtime noticed" during those daily
   restarts is presented as unverified, not as evidence the redundancy
   worked, per the author's own correction during drafting.
+
+## Skill changes from the 2026-08-08 review pass
+
+The drafts exposed four gaps in the skills themselves. All four are fixed
+in `.claude/skills/`, so future posts should not hit them.
+
+- **Word budgets were miscalibrated.** Seven of nine drafts fell below
+  their archetype floor, and the log overrode the rule three separate
+  times with "left lean on purpose rather than padded". It was right every
+  time. A rule that only ever fires falsely is a broken rule. Build
+  writeup is now 500-1500 (was 800-1500) with the 500-800 band named as a
+  legitimate finished shape; delivery lesson is 600-1200 (was 700-1200).
+  Explicit instruction added never to pad toward a number.
+- **No title rule existed.** SEO retitling was free to trade the concrete
+  subject for a generic frame, which is what happened to
+  self-hosting-lessons.md. Voice floor item 6 now requires the title to
+  name the tool, system, number, or claim, and calls out the
+  "What X actually teaches you" / "Lessons from Y" shapes.
+- **No rule against reusing evidence across posts.** Added the "Recycled
+  Evidence" pitfall to blog-post-writer: list what each existing post
+  already owns before drafting, and compress-and-link rather than
+  re-narrate.
+- **text-checker-en's gloss rule could damage a sentence.** Its own
+  hydration-mismatch gloss created a garden-path sentence and introduced
+  a false claim. Rewrite rule 5 now requires glosses to sit in a following
+  sentence or at clause end, never mid-clause, requires checking whether
+  the term is needed at all before defining it, and requires re-reading
+  the whole sentence rather than the diff.
+
+Still open: Phase 0's consistency check catches inconsistent spellings of
+the same term but not numbers that contradict each other across sections,
+which is how "three components" survived a full pass twice in one file.
+Worth a rule if it recurs.
 
 ## Backlog (not drafted, ideas pending real material)
 

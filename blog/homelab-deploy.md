@@ -65,7 +65,3 @@ failure should take one command I can run half-asleep. Remembering
 seven steps correctly at 2am is a worse plan. A Makefile target either
 exists and works or it doesn't. A half-remembered runbook can be
 confidently wrong, which is worse than having none.
-
-The Caddy config and the app repo still don't talk to each other. That
-gap is closed by a paragraph in a markdown file, and paragraphs get
-skipped under pressure in a way that `make` targets don't.

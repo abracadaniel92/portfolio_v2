@@ -140,14 +140,23 @@ Every marker also appears as its own bullet in the Report.
    "at this point in time".
 4. **Do not fabricate.** If a passage is unclear because information is missing,
    flag it. Never invent a fix.
-5. **Match the audience's level.** Clarity is not talking down. A specialist text
+5. **Place a gloss where it cannot break the sentence.** Glossing jargon on
+   first use is Phase 1's job, but an appositive dropped between a subject and
+   its verb creates a garden-path sentence and can smuggle in a claim the
+   author never made. Put the gloss in its own following sentence, or in
+   parentheses at the end of the clause. Never mid-clause. If the surrounding
+   text already explains the phenomenon in plain words, the better fix is to
+   cut the jargon rather than define it: check whether the term is needed at
+   all before glossing it. After adding any gloss, re-read the full sentence
+   as a sentence, not as a diff.
+6. **Match the audience's level.** Clarity is not talking down. A specialist text
    stays specialist. Remove only what blocks the specialist reader.
-6. **Keep formatting.** Markdown structure, lists, headings, and code blocks stay
+7. **Keep formatting.** Markdown structure, lists, headings, and code blocks stay
    intact unless they are the problem.
-7. **Preserve structured documents.** If the text is structured (a README, a
+8. **Preserve structured documents.** If the text is structured (a README, a
    changelog, a doc with required sections), keep its scaffolding. Fix mechanics,
    clarity, flow, and punctuation only. Do not turn a structured doc into an essay.
-8. **Never rewrite quoted material or code.** Quotes, log output, error messages,
+9. **Never rewrite quoted material or code.** Quotes, log output, error messages,
    and code samples are evidence. Flag a problem in them; do not silently fix it.
 
 ## Common mistakes
