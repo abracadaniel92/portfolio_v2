@@ -31,15 +31,19 @@ function BlogIndex() {
                 <span className="post-row__no">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="post-row__main">
-                  <span className="post-row__title">{post.title}</span>
+                <div className="post-row__main">
+                  {/* h2 under the page's h1: the archive's outline is its list
+                      of posts. */}
+                  <h2 className="post-row__title">{post.title}</h2>
                   <span className="post-row__summary">{post.summary}</span>
                   <span className="post-row__tags">
                     <span className="tag">{post.company}</span>
                     <span className="tag">{post.readingTime}</span>
                   </span>
-                </span>
-                <span className="post-row__date">{post.dateLabel}</span>
+                </div>
+                <time className="post-row__date" dateTime={post.date}>
+                  {post.dateLabel}
+                </time>
               </a>
             </li>
           ))}

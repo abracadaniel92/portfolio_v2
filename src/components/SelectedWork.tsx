@@ -335,10 +335,10 @@ function SelectedWork() {
   return (
     <section className="section" id="work">
       <div className="section__head">
-        <span className="section__lead">
+        <div className="section__lead">
           <span className="section__no">02</span>
-          <span className="section__name">Selected work</span>
-        </span>
+          <h2 className="section__name">Selected work</h2>
+        </div>
         <span className="section__meta">05 engagements / 2021–26</span>
       </div>
 

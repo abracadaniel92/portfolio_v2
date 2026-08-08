@@ -52,10 +52,10 @@ function Capacity() {
   return (
     <section className="section" id="capacity">
       <div className="section__head">
-        <span className="section__lead">
+        <div className="section__lead">
           <span className="section__no">03</span>
-          <span className="section__name">Capacity</span>
-        </span>
+          <h2 className="section__name">Capacity</h2>
+        </div>
         <span className="section__meta">Leadership / scope</span>
       </div>
 

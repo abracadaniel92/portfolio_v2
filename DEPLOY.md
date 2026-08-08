@@ -71,9 +71,13 @@ Notes on routing:
   `/blog/<slug>` (see `previewDirectoryIndex` in `vite.config.ts`). If a post
   page ever renders as the homepage again, that is the class of bug: a server
   resolving the URL differently from the prerender, not a broken build.
-- The blog added no inline scripts and no new origins, so **the CSP is
-  unchanged**. Keep it that way: the managed `<head>` block the prerender
-  writes contains only meta/link tags.
+- **The CSP is unchanged.** The blog added no new origins, and the only thing
+  the managed `<head>` block adds beyond meta/link tags is a
+  `<script type="application/ld+json">` data block. That is not governed by
+  `script-src`: a script element whose type is not a JavaScript MIME type is
+  never prepared as a script, so the inline check never runs. Verified against
+  the exact policy above (element present, readable, no violation event). If a
+  real inline `<script>` is ever added, that needs a hash or a nonce.
 
 Notes on the CSP:
 - `style-src` needs `'unsafe-inline'` because the build inlines some styles and
@@ -99,6 +103,11 @@ Reload: `caddy reload --config /etc/caddy/Caddyfile`.
       the prerendered file rather than falling back to the homepage). The tab
       title should be the post title, not "Goce Mojsoski · Product & Delivery".
 - [ ] `/sitemap.xml`, `/rss.xml` and `/robots.txt` all return 200.
+- [ ] Structured data passes: run the homepage and one post through Google's
+      Rich Results Test and Schema.org's validator. Both should report a
+      `Person` and, on a post, a `BlogPosting` plus breadcrumbs, with no errors.
+- [ ] Submit `sitemap.xml` in Google Search Console (one-time, then it recrawls
+      on its own).
 - [ ] No console errors on a post page (a React error #418 means the wrong
       file was served for the URL and the page is falling back to the homepage).
 

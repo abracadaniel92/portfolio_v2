@@ -11,6 +11,8 @@ export type Post = {
   company: string;
   summary: string;
   readingTime: string;
+  /** Body words. Only used by the `BlogPosting` structured data. */
+  wordCount: number;
   /** `## ` headings, in document order, for the contents index. Empty for a
    *  short note with no sections. */
   headings: { id: string; text: string }[];

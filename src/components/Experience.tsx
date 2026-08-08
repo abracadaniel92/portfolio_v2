@@ -120,10 +120,10 @@ function Experience() {
   return (
     <section className="section" id="experience">
       <div className="section__head">
-        <span className="section__lead">
+        <div className="section__lead">
           <span className="section__no">04</span>
-          <span className="section__name">Experience</span>
-        </span>
+          <h2 className="section__name">Experience</h2>
+        </div>
         <span className="section__meta">Ledger / 2015–present</span>
       </div>
 

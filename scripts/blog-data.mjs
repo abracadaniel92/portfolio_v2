@@ -122,10 +122,16 @@ export function formatDate(iso) {
   return `${d} ${months[Number(m) - 1]} ${y}`;
 }
 
-/** RFC 822, for the RSS feed. Posts carry a date but no time; noon UTC keeps
- *  the displayed day the same on both sides of the Atlantic. */
+/** Posts carry a date but no time. Noon UTC keeps the displayed day the same on
+ *  both sides of the Atlantic, so the feed, the sitemap and the structured data
+ *  all agree with the label on the page. */
+export function toUtcNoon(iso) {
+  return `${iso}T12:00:00Z`;
+}
+
+/** RFC 822, for the RSS feed. */
 export function toRfc822(iso) {
-  return new Date(`${iso}T12:00:00Z`).toUTCString();
+  return new Date(toUtcNoon(iso)).toUTCString();
 }
 
 export async function loadPosts() {
@@ -164,6 +170,7 @@ export async function loadPosts() {
         company: data.company,
         summary: data.summary,
         readingTime: `${Math.max(1, Math.round(words / 200))} min`,
+        wordCount: words,
         headings,
         html: marked.parse(content).trim(),
       };

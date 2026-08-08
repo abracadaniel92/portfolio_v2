@@ -13,10 +13,10 @@ function BlogSection() {
   return (
     <section className="section" id="blog">
       <div className="section__head">
-        <span className="section__lead">
+        <div className="section__lead">
           <span className="section__no">07</span>
-          <span className="section__name">Blog</span>
-        </span>
+          <h2 className="section__name">Blog</h2>
+        </div>
         <span className="section__meta">
           {String(POSTS.length).padStart(2, "0")} posts · Notes from the work
         </span>
@@ -29,15 +29,18 @@ function BlogSection() {
               <span className="blog-section__no">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="blog-section__main">
-                <span className="blog-section__title">{post.title}</span>
+              <div className="blog-section__main">
+                {/* h3, one level under this section's "Blog" h2. */}
+                <h3 className="blog-section__title">{post.title}</h3>
                 <span className="blog-section__summary">{post.summary}</span>
                 <span className="blog-section__tags">
                   <span className="tag">{post.company}</span>
                   <span className="tag">{post.readingTime}</span>
                 </span>
-              </span>
-              <span className="blog-section__date">{post.dateLabel}</span>
+              </div>
+              <time className="blog-section__date" dateTime={post.date}>
+                {post.dateLabel}
+              </time>
             </a>
           </li>
         ))}

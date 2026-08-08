@@ -173,6 +173,15 @@ Pipeline:
   and `<!-- head:meta:end -->`. The prerender replaces it per route. Homepage
   metadata is edited there; post metadata comes from frontmatter. Do not delete
   the markers, and keep social URLs absolute (rule 6).
+- **Structured data is generated, not hand-written.** `structuredData()` in
+  `scripts/prerender.mjs` emits one JSON-LD `@graph` per route: `Person` +
+  `WebSite` + `ProfilePage` on the homepage, `Blog` + `BreadcrumbList` on
+  `/blog`, `BlogPosting` + `BreadcrumbList` on a post. The nodes cross-reference
+  by `@id` (`/#person`, `/#website`, `/blog#blog`), so a crawler merges the
+  author of every post into one entity. It is a `type="application/ld+json"`
+  data block, which `script-src` does not govern (verified — see DEPLOY.md), so
+  it needs no CSP change. Never add a JSON-LD block by hand in a component; it
+  would not be in the prerendered HTML that crawlers read.
 - Section numbers now run `01`–`08`: Blog is `07`, contact/footer is `08`.
 
 ## Open items (as of 2026-07-06)

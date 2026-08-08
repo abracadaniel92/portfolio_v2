@@ -38,6 +38,11 @@
 }
 .section__name {
   color: var(--ink);
+  /* An <h2>, so the page has a real outline under the hero's <h1> rather than
+     jumping to the <h3>s inside each section. It still has to read as the mono
+     label it is, so drop the heading's own size and weight. */
+  font-size: inherit;
+  font-weight: inherit;
 }
 .section__meta {
   color: var(--ink-faint);

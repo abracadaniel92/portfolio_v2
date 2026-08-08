@@ -98,10 +98,10 @@ function Skills() {
   return (
     <section className="section" id="skills">
       <div className="section__head">
-        <span className="section__lead">
+        <div className="section__lead">
           <span className="section__no">05</span>
-          <span className="section__name">How I work</span>
-        </span>
+          <h2 className="section__name">How I work</h2>
+        </div>
         <span className="section__meta">Lead · Build · Run · Secure</span>
       </div>
 
