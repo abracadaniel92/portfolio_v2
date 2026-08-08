@@ -3,6 +3,7 @@ import "./ScrollTop.css";
 
 const REST_BOTTOM = 24; // px above the viewport bottom at rest
 const FOOTER_GAP = 24; // px kept between the button and the footer links block
+const MOBILE = "(max-width: 720px)";
 
 /** Fixed "to top" control. Hidden over the hero, fades in once scrolled past it
  *  (same threshold as the side rails), then pins itself just above the footer
@@ -17,20 +18,39 @@ function ScrollTop() {
       setShown(window.scrollY > window.innerHeight * 0.85);
 
       const btn = btnRef.current;
-      // Dock above the footer links (GitHub is the last one), so the button
-      // never covers a link as the footer scrolls in — regardless of viewport
-      // height or a mobile browser's dynamic toolbar.
-      const anchor = document.querySelector(".footer__links");
-      if (btn && anchor) {
-        const anchorTop = anchor.getBoundingClientRect().top;
-        // Lift the button so its bottom edge stays FOOTER_GAP above the links,
-        // but never below its resting position.
-        const lift = Math.max(
-          0,
-          window.innerHeight - anchorTop + FOOTER_GAP - REST_BOTTOM
-        );
-        btn.style.bottom = `${REST_BOTTOM + lift}px`;
+      if (!btn) return;
+
+      // On mobile the links row wraps and grows tall, so docking above it
+      // lifted the button onto "Book a call". There, line the button up with
+      // the contact heading instead: it sits above every control in the
+      // footer, so nothing can end up underneath it.
+      const mobile = window.matchMedia(MOBILE).matches;
+      const anchor = document.querySelector(
+        mobile ? ".footer__eyebrow" : ".footer__links"
+      );
+      // No footer on a blog post; the button keeps its resting CSS position.
+      if (!anchor) return;
+
+      const rect = anchor.getBoundingClientRect();
+
+      if (mobile) {
+        // Centre the button on the heading.
+        const centred =
+          window.innerHeight - rect.top - rect.height / 2 - btn.offsetHeight / 2;
+        // Never below the resting position, never off the top of the viewport.
+        const maxBottom = window.innerHeight - btn.offsetHeight - REST_BOTTOM;
+        btn.style.bottom = `${Math.min(maxBottom, Math.max(REST_BOTTOM, centred))}px`;
+        return;
       }
+
+      // Desktop: dock above the footer links (GitHub is the last one), so the
+      // button never covers a link as the footer scrolls in — regardless of
+      // viewport height or a mobile browser's dynamic toolbar.
+      const lift = Math.max(
+        0,
+        window.innerHeight - rect.top + FOOTER_GAP - REST_BOTTOM
+      );
+      btn.style.bottom = `${REST_BOTTOM + lift}px`;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
