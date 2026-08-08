@@ -30,7 +30,7 @@ function Footer() {
         <p className="footer__eyebrow">
           <span className="footer__mark" aria-hidden="true" />
           <span>
-            <span className="footer__no">07</span> /{" "}
+            <span className="footer__no">08</span> /{" "}
             <span className="footer__name">Contact</span>
           </span>
         </p>

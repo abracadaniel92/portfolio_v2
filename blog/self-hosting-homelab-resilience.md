@@ -1,3 +1,10 @@
+---
+title: "Self-hosting a homelab made every gap in my own resilience impossible to ignore"
+date: 2026-04-27
+company: "Homelab"
+summary: "Running my own infrastructure has not made me better at handling failure. It has made every place I am not resilient impossible to ignore, which is a smaller claim and a more useful one."
+---
+
 # Self-hosting a homelab made every gap in my own resilience impossible to ignore
 
 Running my own infrastructure hasn't made me better at handling failure

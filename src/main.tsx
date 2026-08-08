@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { parseRoute } from './router.ts'
 
 // Prerendered HTML has full page height at first paint, so the browser would
 // restore the previous scroll position on reload (landing below the topbar on
@@ -9,9 +10,11 @@ import App from './App.tsx'
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
 
 const container = document.getElementById('root')!
+// Same parse the prerender used for this file's path, so the tree React builds
+// here matches the markup it is hydrating.
 const app = (
   <StrictMode>
-    <App />
+    <App route={parseRoute(window.location.pathname)} />
   </StrictMode>
 )
 

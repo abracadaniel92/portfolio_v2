@@ -1,3 +1,10 @@
+---
+title: "This site's deploy pipeline has no CI provider"
+date: 2026-06-08
+company: "Homelab"
+summary: "Pushing to main is a production deploy. No GitHub Actions, no Vercel hook, no artifact stored anywhere but a Lenovo ThinkCentre on a shelf. What that tradeoff actually costs."
+---
+
 # This site's deploy pipeline has no CI provider
 
 Pushing to `main` on my portfolio's repo is a production

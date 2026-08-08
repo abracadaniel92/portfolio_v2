@@ -1,3 +1,10 @@
+---
+title: "Avoiding 60 Jira Service Desk licenses for a beta-testing program"
+date: 2026-07-20
+company: "SimonsVoss"
+summary: "Around 60 people needed to work bug reports from beta testers. Buying the seats was never on the table, because I had already solved this exact shape of problem somewhere else."
+---
+
 # Avoiding 60 Jira Service Desk licenses for a beta-testing program
 
 SimonsVoss needed around 60 people able to work bug reports and

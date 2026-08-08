@@ -1,0 +1,68 @@
+/* Mirrors .topbar in Hero.css: same height, hairline and mono treatment, so a
+   blog page reads as the same object as the landing page. */
+.blogbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 14px var(--pad);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.blogbar__brand {
+  color: var(--ink);
+}
+.blogbar__brand:hover {
+  color: var(--signal);
+}
+
+.blogbar__meta {
+  color: var(--ink-dim);
+}
+
+/* Pushed to the right edge, with the resume button after it. */
+.blogbar__back {
+  margin-left: auto;
+  color: var(--ink-dim);
+  transition: color 0.2s ease;
+}
+.blogbar__back:hover {
+  color: var(--signal);
+}
+
+.blogbar__resume {
+  color: var(--ink);
+  background: rgba(210, 64, 46, 0.08);
+  border: 1px solid var(--signal);
+  padding: 5px 17px;
+  font-weight: 500;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+.blogbar__resume:hover {
+  color: var(--canvas);
+  background: var(--signal);
+}
+
+@media (max-width: 720px) {
+  .blogbar {
+    gap: 12px;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+  }
+  /* Two labels plus two links do not fit a phone; the section head below
+     already says "Blog", so drop the duplicate. */
+  .blogbar__meta {
+    display: none;
+  }
+  .blogbar__resume {
+    display: none;
+  }
+}

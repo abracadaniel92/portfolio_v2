@@ -1,0 +1,124 @@
+/* ---- Masthead ---- */
+.blog-index__head {
+  padding-bottom: clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: clamp(28px, 3.5vw, 52px);
+}
+
+.blog-index__mark {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--signal);
+  margin-bottom: 22px;
+}
+
+.blog-index__title {
+  font-weight: 800;
+  /* Half the original monumental scale: it reads as a page title, not a hero.
+     Tracking and leading eased off to suit the smaller size. */
+  font-size: clamp(26px, 4vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.blog-index__lead {
+  max-width: 62ch;
+  margin-top: clamp(20px, 2.4vw, 30px);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+.blog-index__meta {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.blog-index {
+  list-style: none;
+}
+
+.post-row {
+  border-bottom: 1px solid var(--hairline-faint);
+}
+.post-row:first-child {
+  border-top: 1px solid var(--hairline-faint);
+}
+
+.post-row__link {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: clamp(16px, 4vw, 64px);
+  align-items: baseline;
+  padding: clamp(22px, 3vw, 38px) 0;
+}
+
+.post-row__no {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  padding-top: 0.5em;
+}
+
+.post-row__main {
+  display: block;
+  min-width: 0;
+}
+
+.post-row__title {
+  display: block;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.post-row__link:hover .post-row__title {
+  color: var(--signal);
+}
+
+.post-row__summary {
+  display: block;
+  margin-top: 14px;
+  max-width: 62ch;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
+.post-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.post-row__date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .post-row__link {
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+  }
+  .post-row__date {
+    grid-column: 2;
+    margin-top: 16px;
+  }
+}

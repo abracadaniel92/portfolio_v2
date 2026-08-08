@@ -3,12 +3,15 @@ import postOffice from "../assets/skopje-post-office.jpg";
 import Scramble from "./Scramble";
 import "./Hero.css";
 
-const NAV = [
+// `page: true` marks an entry that leaves this page for another route, rather
+// than scrolling to a section of it. The menu shows those with an arrow cue.
+const NAV: { label: string; href: string; page?: boolean }[] = [
   { label: "Selected work", href: "#work" },
   { label: "Capacity", href: "#capacity" },
   { label: "Experience", href: "#experience" },
   { label: "How I work", href: "#skills" },
   { label: "The lab", href: "#lab" },
+  { label: "Blog", href: "/blog", page: true },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -46,6 +49,9 @@ function Hero() {
         <span className="topbar__brand">Goce Mojsoski</span>
         <span className="topbar__meta">Product &amp; delivery</span>
         <span className="topbar__meta">Idx 2015–26</span>
+        <a className="topbar__link" href="/blog">
+          Blog
+        </a>
         <a
           className="topbar__resume"
           href="/files/GoceMojsoskiCV.pdf"
@@ -141,6 +147,11 @@ function Hero() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {n.label}
+                {n.page && (
+                  <span className="menu__cue" aria-hidden="true">
+                    →
+                  </span>
+                )}
               </a>
             ))}
             <a

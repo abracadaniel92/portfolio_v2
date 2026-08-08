@@ -98,6 +98,15 @@
 .topbar__meta {
   color: var(--ink-dim);
 }
+/* Navigation, not a call to action: stays on the neutral ramp so the topbar
+   keeps exactly two signal elements (Resume and the menu button). */
+.topbar__link {
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.topbar__link:hover {
+  color: var(--signal);
+}
 .topbar__menu {
   color: var(--ink);
   background: rgba(210, 64, 46, 0.08);
@@ -184,12 +193,26 @@
 }
 .menu__nav {
   flex: 1;
+  /* Without this a flex child will not shrink below its content, so a nav
+     taller than the viewport overflowed the fixed overlay with no way to
+     reach the last entries: body scroll is locked while the menu is open. */
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  /* Centred while the list fits; falls back to top-aligned when it does not,
+     because centred overflow puts the first entries above scrollTop 0 where
+     they cannot be reached. The plain value stays first as a fallback. */
   justify-content: center;
+  justify-content: safe center;
   padding: 0 var(--pad);
+  overflow-y: auto;
+  /* Don't chain the scroll to the locked body behind the overlay. */
+  overscroll-behavior: contain;
 }
 .menu__link {
+  /* Keep full row height when the list scrolls, rather than compressing
+     unevenly to fit. */
+  flex: none;
   display: flex;
   align-items: baseline;
   gap: clamp(16px, 3vw, 40px);
@@ -220,6 +243,16 @@
   color: var(--signal);
   min-width: 2ch;
 }
+/* Marks a menu entry that leaves this page instead of scrolling to a section
+   of it. Sits after the label so the numbered column stays aligned. */
+.menu__cue {
+  margin-left: 14px;
+  font-family: var(--mono);
+  font-size: 0.42em;
+  letter-spacing: 1px;
+  color: var(--signal);
+}
+
 .menu__link--resume {
   color: var(--signal);
 }
@@ -469,8 +502,15 @@
   .spine {
     display: none;
   }
-  .topbar span:nth-child(2),
-  .topbar span:nth-child(3) {
+  /* Class-based, not nth-child: the topbar gains and loses items over time and
+     positional rules silently retarget when it does. */
+  .topbar__meta {
+    display: none;
+  }
+  /* Brand + Blog + Resume + menu overflows a 360px bar. Resume gives up its
+     slot here: it is still in the menu overlay and the footer, whereas Blog
+     is the only always-visible route off this page. */
+  .topbar__resume {
     display: none;
   }
   .topbar {
@@ -479,10 +519,6 @@
     gap: 17px;
     padding-top: 13px;
     padding-bottom: 13px;
-  }
-  .topbar__resume {
-    padding: 4px 15px;
-    margin-left: 4px;
   }
   .topbar__menu {
     background: none;

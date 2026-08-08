@@ -1,13 +1,14 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App.tsx";
+import { parseRoute } from "./router.ts";
 
-/** Rendered at build time by scripts/prerender.mjs to bake static markup
- *  into dist/index.html. The client then hydrates it (see main.tsx). */
-export function render() {
+/** Rendered once per route at build time by scripts/prerender.mjs to bake
+ *  static markup into each dist page. The client then hydrates it (main.tsx). */
+export function render(pathname: string) {
   return renderToString(
     <StrictMode>
-      <App />
+      <App route={parseRoute(pathname)} />
     </StrictMode>,
   );
 }

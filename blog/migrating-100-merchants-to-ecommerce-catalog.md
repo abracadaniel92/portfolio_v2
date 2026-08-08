@@ -1,3 +1,10 @@
+---
+title: "Migrating 100 merchants from a daily-deals platform to a real e-commerce catalog"
+date: 2026-05-18
+company: "Ananas.mk"
+summary: "Fewer than 10% of the merchants moving off Grouper used the integration API built for the job. The other ninety-plus filled in a spreadsheet, and that is where five months of work actually happened."
+---
+
 # Migrating 100 merchants from a daily-deals platform to a real e-commerce catalog
 
 Fewer than 10% of the roughly 100 merchants moving off Grouper onto

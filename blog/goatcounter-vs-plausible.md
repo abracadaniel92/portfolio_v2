@@ -1,3 +1,10 @@
+---
+title: "GoatCounter, not Plausible, tracks visits on this site"
+date: 2026-02-23
+company: "Homelab"
+summary: "Plausible was the real alternative, not Google Analytics. The decision came down to what self-hosting each one costs to operate: Postgres plus ClickHouse, or one Go binary."
+---
+
 # GoatCounter, not Plausible, tracks visits on this site
 
 GoatCounter runs the analytics on gmojsoski.com, and Plausible was the

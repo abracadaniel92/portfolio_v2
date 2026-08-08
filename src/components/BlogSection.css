@@ -1,0 +1,102 @@
+.blog-section {
+  list-style: none;
+}
+
+.blog-section__row {
+  border-bottom: 1px solid var(--hairline-faint);
+}
+.blog-section__row:first-child {
+  border-top: 1px solid var(--hairline-faint);
+}
+
+.blog-section__link {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: clamp(16px, 4vw, 64px);
+  align-items: baseline;
+  padding: clamp(22px, 3vw, 38px) 0;
+}
+
+.blog-section__no {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  padding-top: 0.5em;
+}
+
+.blog-section__main {
+  display: block;
+  min-width: 0;
+}
+
+.blog-section__title {
+  display: block;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.blog-section__link:hover .blog-section__title {
+  color: var(--signal);
+}
+
+.blog-section__summary {
+  display: block;
+  margin-top: 14px;
+  max-width: 62ch;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
+.blog-section__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.blog-section__date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.blog-section__all {
+  display: inline-block;
+  margin-top: clamp(24px, 3vw, 40px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid var(--signal);
+  padding: 9px 16px;
+  background: rgba(210, 64, 46, 0.06);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.blog-section__all:hover {
+  background: var(--signal);
+  color: var(--canvas);
+}
+
+@media (max-width: 760px) {
+  .blog-section__link {
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+  }
+  /* The date drops under the text rather than squeezing a third column. */
+  .blog-section__date {
+    grid-column: 2;
+    margin-top: 16px;
+  }
+}

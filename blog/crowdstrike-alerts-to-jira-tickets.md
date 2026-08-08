@@ -1,3 +1,10 @@
+---
+title: "Getting CrowdStrike and phishing alerts into Jira before I had admin rights"
+date: 2026-04-06
+company: "Arcadia"
+summary: "CrowdStrike detections and phishing reports arrived by email with no line into Jira, and I had no admin rights to build one. Google Apps Script and a shared inbox turned out to be enough."
+---
+
 # Getting CrowdStrike and phishing alerts into Jira before I had admin rights
 
 CrowdStrike alerts and InfoSecIQ phishing reports at Arcadia both

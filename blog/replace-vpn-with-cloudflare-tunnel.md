@@ -1,3 +1,10 @@
+---
+title: "Replacing a VPN with a Cloudflare Tunnel secured by 2FA on every service"
+date: 2026-03-16
+company: "Homelab"
+summary: "Every internal service on my homelab sits behind a Cloudflare Tunnel with 2FA on each one, not a VPN. Reliability, not an exotic attack scenario, was the real design constraint."
+---
+
 # Replacing a VPN with a Cloudflare Tunnel secured by 2FA on every service
 
 My router restarts once a day, and where I live loses power or

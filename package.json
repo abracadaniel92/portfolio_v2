@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/build-blog.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/build-blog.mjs",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "prelint": "node scripts/build-blog.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -23,6 +26,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "marked": "18.0.9",
     "png-to-ico": "^3.0.1",
     "sharp": "^0.35.1",
     "typescript": "~6.0.2",

@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import Hero from "./components/Hero";
-import SelectedWork from "./components/SelectedWork";
-import Capacity from "./components/Capacity";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import PersonalProjects from "./components/PersonalProjects";
+import Home from "./components/Home";
+import BlogIndex from "./components/BlogIndex";
+import BlogPost from "./components/BlogPost";
 import Footer from "./components/Footer";
 import Rails from "./components/Rails";
 import ScrollTop from "./components/ScrollTop";
+import { POSTS } from "./blog/posts.generated";
+import type { Route } from "./router";
 import "./App.css";
 
 const REVEAL_SELECTOR =
-  ".section__head, .work-row, .exp, .pillar, .lab-card, .homelab, .capacity__lead, .stats";
+  ".section__head, .work-row, .exp, .pillar, .lab-card, .homelab, .capacity__lead, .stats, .blog-section__row, .post-row";
 
-function App() {
+function App({ route }: { route: Route }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -65,13 +64,14 @@ function App() {
   return (
     <>
       <Rails />
-      <Hero />
-      <SelectedWork />
-      <Capacity />
-      <Experience />
-      <Skills />
-      <PersonalProjects />
-      <Footer />
+      {route.kind === "home" && <Home />}
+      {route.kind === "blog" && <BlogIndex />}
+      {route.kind === "post" && (
+        <BlogPost post={POSTS.find((p) => p.slug === route.slug)!} />
+      )}
+      {/* A post ends on its own newer/older nav. The contact pitch belongs on
+          the homepage and the blog index, not at the foot of every article. */}
+      {route.kind !== "post" && <Footer />}
       <ScrollTop />
     </>
   );

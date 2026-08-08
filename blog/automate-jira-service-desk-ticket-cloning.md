@@ -1,3 +1,10 @@
+---
+title: "Automating Jira Service Desk ticket cloning for 15 people on 3 free seats"
+date: 2026-06-29
+company: "TSD Digital"
+summary: "Fifteen people needed to work tickets across 20 customer projects on three free seats. Buying more seats buys visibility into a queue, not a route into a sprint, so I built the route instead."
+---
+
 # Automating Jira Service Desk ticket cloning for 15 people on 3 free seats
 
 Jira Service Desk's free tier gave TSD Digital three seats. Fifteen

@@ -1,10 +1,13 @@
 # Editorial log
 
 Tracks text-checker-en passes, title changes, and structural notes for the
-drafts in this folder. Not published content; delete or fold into real blog
-infra whenever that exists.
+posts in this folder. Not published content: the build skips this file (see
+`NOT_A_POST` in `scripts/blog-data.mjs`), so it never becomes a page.
 
-## ssr-migration.md
+Section headings are filenames, and filenames are URL slugs. If you rename a
+post, rename its heading here too.
+
+## react-ssr-without-a-framework.md
 
 - Title: "What SSR actually meant for a two-dependency portfolio" -> "Adding
   server-side rendering to a React portfolio without a framework migration"
@@ -34,7 +37,7 @@ infra whenever that exists.
   `exp--collapsed` both exist, `suppressHydrationWarning` is present in
   Capacity.tsx and Scramble.tsx.
 
-## homelab-deploy.md
+## deploy-pipeline-without-ci-provider.md
 
 - Title: "The deploy pipeline for this site has no CI provider" -> "This
   site's deploy pipeline has no CI provider" (tightened, same meaning).
@@ -48,7 +51,7 @@ infra whenever that exists.
   confidently wrong, which is worse than having none", which was always
   the stronger close. Word count 636 -> 597.
 
-## self-hosting-lessons.md
+## self-hosting-homelab-resilience.md
 
 - Title: "Self-hosting made the gaps in my own resilience impossible to
   ignore" -> "What self-hosting a homelab actually teaches you"
@@ -67,8 +70,8 @@ infra whenever that exists.
 - Structural, the significant one (2026-08-08): all three examples in
   "Where that shows up, specifically" were borrowed from other posts in
   this same batch. Dual tunnel replicas is the centerpiece of
-  cloudflare-tunnel-zero-trust.md; the CSP/Caddyfile seam and the
-  lockfile-vs-Node-version commit are both from homelab-deploy.md. A
+  replace-vpn-with-cloudflare-tunnel.md; the CSP/Caddyfile seam and the
+  lockfile-vs-Node-version commit are both from deploy-pipeline-without-ci-provider.md. A
   position piece earns its claim in the evidence section, and this one
   borrowed all of it. Kept the CSP case (compressed, now explicitly
   pointing at the post that tells it properly) and replaced the other two
@@ -80,7 +83,7 @@ infra whenever that exists.
 - Closing paragraph also re-listed the three borrowed examples; trimmed
   to "The seams I keep finding are not homelab problems."
 
-## grouper-to-ananas-migration.md
+## migrating-100-merchants-to-ecommerce-catalog.md
 
 - Title: "Migrating 100 merchants off a deal-of-the-day site onto a real
   catalog" -> "Migrating 100 merchants from a daily-deals platform to a
@@ -94,7 +97,7 @@ infra whenever that exists.
   answer (hold a workshop upfront), not an invented one; an earlier draft
   had a `[QUESTION: ...]` marker here that was resolved and removed.
 
-## jira-service-desk-cloning.md
+## automate-jira-service-desk-ticket-cloning.md
 
 - Title: "Three seats, fifteen people: cloning a Jira Service Desk into a
   real backlog" -> "Automating Jira Service Desk ticket cloning for 15
@@ -103,7 +106,7 @@ infra whenever that exists.
 - text-checker-en: fixed "20" vs "Twenty" numeral inconsistency (3 spots,
   standardized to numerals). Replaced "SLA" (jargon) with plain language.
 
-## crowdstrike-jira-alerts.md
+## crowdstrike-alerts-to-jira-tickets.md
 
 - text-checker-en: clean on first pass, no dashes, no blocklist hits, one
   deliberate antithesis line kept ("The gap was never a technical one. It
@@ -119,17 +122,17 @@ infra whenever that exists.
   section to reflect that (the real lever was pushing for access/visibility
   earlier, not "look before you build").
 
-## simonsvoss-service-desk-reuse.md
+## avoiding-60-jira-service-desk-licenses.md
 
 - text-checker-en: clean, no dashes, no blocklist hits, one deliberate
   antithesis line ("not because this build was inherently easier, but
   because it had already been paid for once, somewhere else").
 - Word count: 534, under the 800-1500 build-writeup floor. Short on
   purpose: it deliberately doesn't re-explain automations one and two
-  since that's already covered in jira-service-desk-cloning.md, and
+  since that's already covered in automate-jira-service-desk-ticket-cloning.md, and
   re-explaining them here would be padding, not content.
 - Scope note: originally considered folding this into
-  jira-service-desk-cloning.md as a "this pattern traveled" section, but
+  automate-jira-service-desk-ticket-cloning.md as a "this pattern traveled" section, but
   split into its own post once the SimonsVoss specifics came in (~60
   licenses avoided, beta-tester feedback intake, Teams instead of Slack,
   no per-customer project split). Different enough shape that merging
@@ -163,7 +166,7 @@ infra whenever that exists.
   it was dropped turns out to be more interesting than "a rebuild didn't
   carry everything over on day one".
 
-## cloudflare-tunnel-zero-trust.md
+## replace-vpn-with-cloudflare-tunnel.md
 
 - text-checker-en: found four instances of the "isn't X. It's Y" /
   "X. It does nothing for Y." antithesis construction on the first pass,
@@ -195,7 +198,7 @@ in `.claude/skills/`, so future posts should not hit them.
   Explicit instruction added never to pad toward a number.
 - **No title rule existed.** SEO retitling was free to trade the concrete
   subject for a generic frame, which is what happened to
-  self-hosting-lessons.md. Voice floor item 6 now requires the title to
+  self-hosting-homelab-resilience.md. Voice floor item 6 now requires the title to
   name the tool, system, number, or claim, and calls out the
   "What X actually teaches you" / "Lessons from Y" shapes.
 - **No rule against reusing evidence across posts.** Added the "Recycled
@@ -251,8 +254,20 @@ Worth a rule if it recurs.
 
 ## Open items
 
-- No blog routing or slugs exist yet (see CLAUDE.md: "blog infrastructure
-  does not exist in this repo yet"). When it does, revisit filenames as
-  URL slugs; they were named before SEO was a consideration for this
-  batch (e.g. `jira-service-desk-cloning.md` vs. the current title's
-  emphasis on "automating").
+- ~~No blog routing or slugs exist yet.~~ **Built 2026-08-08.** Each file is
+  now live at `/blog/<filename>`, and every draft gained a frontmatter block
+  (`title`, `date`, `company`, `summary`). See "The blog" in CLAUDE.md.
+- ~~Slugs were chosen before SEO mattered.~~ **Renamed 2026-08-08**, before
+  anything was indexed or shared. Eight of nine changed; the filenames in this
+  log were updated to match. The renames dropped internal brand names nobody
+  searches for (Grouper, Ananas, SimonsVoss) in favour of what each post
+  answers. `goatcounter-vs-plausible` was deliberately left alone: it already
+  matches the comparison query exactly, which is the strongest position any of
+  these has.
+  **From here on, a rename needs a redirect.** There is no redirect mechanism
+  in the build, so adding one means a Caddy rule.
+- ~~All nine share one date.~~ **Spaced 2026-08-08** across 2026-02-23 to
+  2026-08-08, roughly three weeks apart. These are backdated publication
+  dates, not the dates the posts were written (all nine were drafted in one
+  batch). Ordering was chosen so the homepage's top three alternate delivery
+  work and homelab rather than running three homelab posts together.

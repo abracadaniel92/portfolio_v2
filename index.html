@@ -15,6 +15,16 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap"
       rel="stylesheet"
     />
+    <!--
+      PRERENDER-MANAGED BLOCK. scripts/prerender.mjs replaces everything between
+      the two markers below, once per route, so /blog and each post get their own
+      title, description, canonical and social tags. The values here are the
+      homepage's, and are also what the dev server shows.
+
+      Edit homepage metadata here. Per-post metadata comes from the frontmatter
+      in blog/*.md. Social URLs stay absolute (CLAUDE.md rule 6).
+    -->
+    <!-- head:meta:start -->
     <title>Goce Mojsoski · Product &amp; Delivery</title>
 
     <meta
@@ -22,6 +32,13 @@
       content="Product and delivery leader. A decade shipping products, teams and outcomes across cloud, SaaS and commerce, US and Europe."
     />
     <meta name="author" content="Goce Mojsoski" />
+    <link rel="canonical" href="https://gmojsoski.com/" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Blog · Goce Mojsoski"
+      href="https://gmojsoski.com/rss.xml"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://gmojsoski.com/" />
@@ -41,6 +58,7 @@
       content="A decade shipping products, teams and outcomes across cloud, SaaS and commerce, US and Europe."
     />
     <meta name="twitter:image" content="https://gmojsoski.com/og-image.png" />
+    <!-- head:meta:end -->
   </head>
   <body>
     <div id="root"></div>

@@ -14,6 +14,10 @@ npm run build      # outputs dist/
 `dist/` is everything: `index.html`, hashed `assets/`, favicons,
 `og-image.png`, `site.webmanifest`, and `files/GoceMojsoskiCV.pdf`.
 
+Since the blog landed, the build also emits one prerendered page per route:
+`dist/blog/index.html` and `dist/blog/<slug>/index.html` for each post, plus
+`sitemap.xml` and `rss.xml` at the root (`robots.txt` ships from `public/`).
+
 ## Caddy
 
 Serve `dist/` with SPA-style fallback and security headers. Example
@@ -24,7 +28,11 @@ gmojsoski.com, www.gmojsoski.com {
     root * /srv/portfolio/dist
     encode zstd gzip
     file_server
-    try_files {path} /index.html
+    # {path}/index.html resolves /blog and /blog/<slug> straight to their
+    # prerendered files. Without it the site still works, but file_server's
+    # canonical-directory rule 301s /blog -> /blog/, which costs a round trip
+    # and lands users on a URL that differs from the page's own rel=canonical.
+    try_files {path} {path}/index.html /index.html
 
     header {
         # HTTPS only, one year, include subdomains
@@ -41,13 +49,31 @@ gmojsoski.com, www.gmojsoski.com {
         -Server
     }
 
-    # Long cache for hashed assets, no cache for the HTML entry
+    # Long cache for hashed assets, no cache for any prerendered HTML entry
     @assets path /assets/*
     header @assets Cache-Control "public, max-age=31536000, immutable"
-    @html path /index.html
+    @html path / /index.html /blog /blog/*
     header @html Cache-Control "no-cache"
 }
 ```
+
+Notes on routing:
+- Anything unknown falls back to the homepage, which is exactly what
+  `src/router.ts` renders for an unmatched path, so the fallback page is never
+  a hydration mismatch.
+- The two changes above (`try_files`, `@html`) are both optimisations, not
+  requirements: the blog serves correctly on the original config. **Verify the
+  trailing-slash behaviour on the live server**, since it could not be tested
+  locally: `curl -sI https://gmojsoski.com/blog | head -1` should return `200`,
+  not `301`. If it returns 301, the `try_files` line above was not applied.
+- **`vite preview` needed a plugin to match this**, since Vite's html fallback
+  looks for `<url>.html` and would otherwise serve the homepage for
+  `/blog/<slug>` (see `previewDirectoryIndex` in `vite.config.ts`). If a post
+  page ever renders as the homepage again, that is the class of bug: a server
+  resolving the URL differently from the prerender, not a broken build.
+- The blog added no inline scripts and no new origins, so **the CSP is
+  unchanged**. Keep it that way: the managed `<head>` block the prerender
+  writes contains only meta/link tags.
 
 Notes on the CSP:
 - `style-src` needs `'unsafe-inline'` because the build inlines some styles and
@@ -68,6 +94,13 @@ Reload: `caddy reload --config /etc/caddy/Caddyfile`.
 - [ ] Re-scrape the social card so the new OG image shows:
       LinkedIn Post Inspector + Facebook Sharing Debugger (they cache aggressively).
 - [ ] Spot-check the live Skopje clock in the footer and the menu anchors.
+- [ ] `/blog` lists every post and `/blog/<slug>` loads a post directly (open
+      one in a fresh tab, not by clicking through, to prove the server serves
+      the prerendered file rather than falling back to the homepage). The tab
+      title should be the post title, not "Goce Mojsoski · Product & Delivery".
+- [ ] `/sitemap.xml`, `/rss.xml` and `/robots.txt` all return 200.
+- [ ] No console errors on a post page (a React error #418 means the wrong
+      file was served for the URL and the page is falling back to the homepage).
 
 ## Domain / metadata
 

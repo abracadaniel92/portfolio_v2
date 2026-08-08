@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Built from blog/*.md by scripts/build-blog.mjs on every dev/build/lint run.
+# The markdown is the source; this is derived output.
+src/blog/posts.generated.ts
+
 # Local Claude Code config. Skills ARE tracked on purpose so they travel with the
 # repo to other machines; everything else under .claude/ is machine-specific
 # (launch.json holds absolute local paths) and stays local.

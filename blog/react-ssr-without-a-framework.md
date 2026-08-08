@@ -1,3 +1,10 @@
+---
+title: "Adding server-side rendering to a React portfolio without a framework migration"
+date: 2026-08-08
+company: "Homelab"
+summary: "Before this change, a crawler that did not run JavaScript got an empty div. Real markup now gets baked in at build time, using nothing but react, react-dom and a 30-line script."
+---
+
 # Adding server-side rendering to a React portfolio without a framework migration
 
 `scripts/prerender.mjs` looks for a literal string in `dist/index.html`:
