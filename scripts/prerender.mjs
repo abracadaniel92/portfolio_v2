@@ -211,8 +211,18 @@ function structuredData(route) {
       description: route.description,
       inLanguage: "en",
       isPartOf: { "@id": SITE_ID },
-      about: { "@id": PERSON_ID },
-      primaryImageOfPage: OG_IMAGE,
+      // `mainEntity`, not `about`: Google requires it on a ProfilePage and
+      // rejects the page as invalid without it. The two read alike, but only
+      // this one says "the page IS about this person" strongly enough to count.
+      mainEntity: { "@id": PERSON_ID },
+      // Spelled out as an ImageObject. Handed a bare URL string, Google coerces
+      // it to an ImageObject with the URL parked in `name` and no `url` at all.
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+      },
     },
   ];
 }
