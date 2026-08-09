@@ -146,12 +146,20 @@ Pipeline:
 | `scripts/blog-data.mjs` | Reads and parses `blog/*.md`, renders with `marked`. The single source of truth. |
 | `scripts/build-blog.mjs` | Writes `src/blog/posts.generated.ts`. Runs as `predev`/`prebuild`/`prelint`. |
 | `src/blog/posts.generated.ts` | **Gitignored, generated.** Never edit or commit it; edit the markdown. |
-| `src/router.ts` | Maps a pathname to `home` / `blog` / `post`. Unknown paths resolve to `home`, matching Caddy's fallback. |
-| `scripts/prerender.mjs` | Renders every route to its own `dist` file, rewrites the per-page `<head>`, emits `sitemap.xml` and `rss.xml`. |
+| `src/router.ts` | Maps a pathname to `home` / `blog` / `post` / `notfound`. Unknown paths are `notfound`, matching what Caddy serves them. Also normalizes `/index.html` and trailing slashes so a directly named index file hydrates as the directory it indexes. |
+| `scripts/prerender.mjs` | Renders every route to its own `dist` file, rewrites the per-page `<head>`, emits `404.html`, `sitemap.xml` and `rss.xml`. |
 
 - **In-site links are plain anchors, not a client router.** Every route is a
   real prerendered file, so navigation is a normal page load. If you ever add
   interception, the post HTML has to reach the client for the target route.
+- **A miss is a real 404, and that depends on the server.** `dist/404.html` is
+  prerendered from `NotFound.tsx` and served by Caddy's error handler with a 404
+  status. It only works because Caddy's `try_files` has no `/index.html` at the
+  end: with one, every unknown URL answers 200 with the homepage, which is a
+  soft 404 and, for the nine post URLs, was a real indexing outage (see
+  DEPLOY.md). `404.html` is `noindex`, carries no canonical and no JSON-LD, and
+  is excluded from `sitemap.xml` via the route's `noindex` flag. If you add a
+  route to `prerender.mjs`, do not copy that flag unless you mean all of it.
 - **A post page is three columns** (`.post__layout`): contents index, prose,
   spec rail. The prose holds a 74ch measure and the rails carry the rest of the
   width, which is why the page does not trail off into empty space. The

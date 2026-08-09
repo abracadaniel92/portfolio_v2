@@ -7,10 +7,12 @@
 //   /              -> dist/index.html
 //   /blog          -> dist/blog/index.html
 //   /blog/<slug>   -> dist/blog/<slug>/index.html
+//   (unmatched)    -> dist/404.html
 //
-// Caddy's `try_files {path} /index.html` serves those directories directly and
-// still falls back to the homepage for anything unknown, so no server config
-// change is needed.
+// Caddy resolves the first three with `try_files {path} {path}/index.html` and
+// serves 404.html from its error handler for anything else, with a real 404
+// status. That `try_files` deliberately has no `/index.html` at the end: with
+// one, every unknown URL answered 200 with the homepage instead.
 //
 // Also emits sitemap.xml and rss.xml from the same post data.
 import { mkdir, readFile, writeFile, rm } from "node:fs/promises";
@@ -90,6 +92,20 @@ const routes = [
     publishedTime: post.date,
     post,
   })),
+  // Not a navigable route. Caddy's error handler serves this file, with a real
+  // 404 status, for any path that does not resolve to one of the pages above.
+  // `noindex` drops it from sitemap.xml and suppresses the canonical and the
+  // JSON-LD, so it never presents itself as a real page.
+  {
+    path: "/404",
+    out: "404.html",
+    title: "Page not found · Goce Mojsoski",
+    socialTitle: "Page not found",
+    description:
+      "That page does not exist. Head for the homepage or the blog instead.",
+    ogType: "website",
+    noindex: true,
+  },
 ];
 
 // ---- JSON-LD ----------------------------------------------------------------
@@ -252,8 +268,12 @@ function headBlock(route) {
     // Default indexing, but opt in to full-size image previews and untruncated
     // snippets. Without max-image-preview:large the card in Google Discover and
     // in image-rich results falls back to a thumbnail.
-    `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
-    `<link rel="canonical" href="${url}" />`,
+    route.noindex
+      ? `<meta name="robots" content="noindex, follow" />`
+      : `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
+    // No canonical on the 404: the file answers for many URLs, so pointing them
+    // all at one address is the soft-404 signal this page exists to avoid.
+    route.noindex ? null : `<link rel="canonical" href="${url}" />`,
     `<link rel="alternate" type="application/rss+xml" title="${escapeHtml(
       BLOG_TITLE
     )}" href="${SITE_URL}/rss.xml" />`,
@@ -290,7 +310,10 @@ function headBlock(route) {
     `<meta name="twitter:description" content="${description}" />`,
     `<meta name="twitter:image" content="${OG_IMAGE}" />`,
     `<meta name="twitter:image:alt" content="${escapeHtml(OG_IMAGE_ALT)}" />`,
-    jsonLd(route),
+    // The fallback branch of structuredData() describes the homepage, so a
+    // noindex page must not emit any: a 404 claiming to be the ProfilePage is
+    // worse than no structured data at all.
+    route.noindex ? null : jsonLd(route),
   ]
     .filter(Boolean)
     .join("\n    ");
@@ -316,6 +339,7 @@ for (const route of routes) {
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes
+  .filter((route) => !route.noindex)
   .map((route) => {
     const url = `${SITE_URL}${route.path === "/" ? "/" : route.path}`;
     const lastmod = route.publishedTime ?? posts[0]?.date;

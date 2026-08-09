@@ -1,0 +1,79 @@
+/* ---- Masthead ---- */
+/* Same scale and rhythm as .blog-index__head: a 404 is a page, so it gets a
+   masthead rather than the mono section head the homepage sections use. */
+.notfound__head {
+  padding-bottom: clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: clamp(28px, 3.5vw, 52px);
+}
+
+.notfound__mark {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--signal);
+  margin-bottom: 22px;
+}
+
+.notfound__code {
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.notfound__title {
+  font-weight: 800;
+  font-size: clamp(26px, 4vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.notfound__lead {
+  max-width: 62ch;
+  margin-top: clamp(20px, 2.4vw, 30px);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+/* ---- Destinations ---- */
+/* The quiet utility button variant, same vocabulary as .to-top: hairline box,
+   bracketed mono label, border and text lift to signal on hover. */
+.notfound__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.notfound__link {
+  padding: 9px 18px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+}
+
+.notfound__link:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+.notfound__link:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .notfound__link {
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+}

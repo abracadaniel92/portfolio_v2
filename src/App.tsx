@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Home from "./components/Home";
 import BlogIndex from "./components/BlogIndex";
 import BlogPost from "./components/BlogPost";
+import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
 import Rails from "./components/Rails";
 import ScrollTop from "./components/ScrollTop";
@@ -69,6 +70,7 @@ function App({ route }: { route: Route }) {
       {route.kind === "post" && (
         <BlogPost post={POSTS.find((p) => p.slug === route.slug)!} />
       )}
+      {route.kind === "notfound" && <NotFound />}
       {/* A post ends on its own newer/older nav. The contact pitch belongs on
           the homepage and the blog index, not at the foot of every article. */}
       {route.kind !== "post" && <Footer />}

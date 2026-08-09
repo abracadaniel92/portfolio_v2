@@ -24,15 +24,24 @@ Serve `dist/` with SPA-style fallback and security headers. Example
 `Caddyfile`:
 
 ```caddy
-gmojsoski.com, www.gmojsoski.com {
+# www serves the identical build, so it must 301 rather than answer 200.
+www.gmojsoski.com {
+    redir https://gmojsoski.com{uri} permanent
+}
+
+gmojsoski.com {
     root * /srv/portfolio/dist
     encode zstd gzip
     file_server
-    # {path}/index.html resolves /blog and /blog/<slug> straight to their
-    # prerendered files. Without it the site still works, but file_server's
-    # canonical-directory rule 301s /blog -> /blog/, which costs a round trip
-    # and lands users on a URL that differs from the page's own rel=canonical.
-    try_files {path} {path}/index.html /index.html
+    # {path}/index.html is REQUIRED, not an optimisation. It resolves /blog and
+    # /blog/<slug> to their prerendered files. Without it every one of those URLs
+    # falls through and serves the homepage at 200, so the whole blog reads as
+    # duplicate content.
+    #
+    # There is deliberately NO /index.html fallback at the end. With one, every
+    # unknown URL answers 200 with the homepage, which Google reads as a soft
+    # 404. Without it, a miss reaches handle_errors below.
+    try_files {path} {path}/index.html
 
     header {
         # HTTPS only, one year, include subdomains
@@ -49,23 +58,50 @@ gmojsoski.com, www.gmojsoski.com {
         -Server
     }
 
-    # Long cache for hashed assets, no cache for any prerendered HTML entry
+    # Long cache for hashed assets, no cache for any prerendered HTML entry.
+    # `header` runs before `try_files` rewrites the path, so the blog entries
+    # have to be listed explicitly.
     @assets path /assets/*
     header @assets Cache-Control "public, max-age=31536000, immutable"
     @html path / /index.html /blog /blog/*
     header @html Cache-Control "no-cache"
+
+    # A miss serves the prerendered 404 page WITH a 404 status. An error route is
+    # a separate route, so it inherits none of the headers above and has to
+    # repeat them.
+    handle_errors 404 {
+        rewrite * /404.html
+        file_server
+    }
 }
 ```
 
+On the homelab the error handler cannot live in the site's `handle` block, since
+`handle_errors` is a site-level directive and Caddy rejects it inside `handle`
+outright. It sits in the shared `handle_errors` in the main `Caddyfile`, matched
+to the host with `expression {err.status_code} == 404 && {host} == "gmojsoski.com"`
+so other homelab services keep their plain-text errors.
+
+**The live config is not this file.** Caddy runs on the homelab server, and its
+real config is `docker/caddy/config.d/10-gmojsoski-home.caddy` plus the
+`handle_errors` block in `docker/caddy/Caddyfile`, both in the `lenovo-homelab`
+repo (a `handle` block inside one `:80` site, since Cloudflare terminates TLS in
+front of it). The block above is the equivalent standalone form. Change the
+homelab repo, then reload Caddy there; editing only this file changes nothing.
+The apply-and-verify runbook is
+`lenovo-homelab/docs/how-to-guides/gmojsoski-404-and-canonical-fix.md`.
+
 Notes on routing:
-- Anything unknown falls back to the homepage, which is exactly what
-  `src/router.ts` renders for an unmatched path, so the fallback page is never
-  a hydration mismatch.
-- The two changes above (`try_files`, `@html`) are both optimisations, not
-  requirements: the blog serves correctly on the original config. **Verify the
-  trailing-slash behaviour on the live server**, since it could not be tested
-  locally: `curl -sI https://gmojsoski.com/blog | head -1` should return `200`,
-  not `301`. If it returns 301, the `try_files` line above was not applied.
+- Anything unknown returns `dist/404.html` with a real 404 status, which is what
+  `src/router.ts` renders for an unmatched path, so the error page is never a
+  hydration mismatch. Until 2026-08-09 it fell back to the homepage at 200
+  instead, which made every stale inbound link a soft 404.
+- **`{path}/index.html` was missing from the live config from the blog launch
+  (2026-08-08) until 2026-08-09.** Every post URL served the homepage at 200,
+  which is what produced the Search Console "Duplicate, Google chose different
+  canonical" and "Duplicate without user-selected canonical" reports. Treat that
+  line as load-bearing. The regression test is the `<title>` check in the
+  checklist below, not the status code: the broken state returned 200 too.
 - **`vite preview` needed a plugin to match this**, since Vite's html fallback
   looks for `<url>.html` and would otherwise serve the homepage for
   `/blog/<slug>` (see `previewDirectoryIndex` in `vite.config.ts`). If a post
@@ -98,10 +134,23 @@ Reload: `caddy reload --config /etc/caddy/Caddyfile`.
 - [ ] Re-scrape the social card so the new OG image shows:
       LinkedIn Post Inspector + Facebook Sharing Debugger (they cache aggressively).
 - [ ] Spot-check the live Skopje clock in the footer and the menu anchors.
-- [ ] `/blog` lists every post and `/blog/<slug>` loads a post directly (open
-      one in a fresh tab, not by clicking through, to prove the server serves
-      the prerendered file rather than falling back to the homepage). The tab
-      title should be the post title, not "Goce Mojsoski · Product & Delivery".
+- [ ] **Every sitemap URL serves its own page, not the homepage.** This is the
+      one check that catches a broken `try_files`, and a status code will not:
+      the failure mode is 200 with the wrong content. Every line must print a
+      distinct canonical matching its own URL:
+
+      ```bash
+      curl -s https://gmojsoski.com/sitemap.xml | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | while read -r u; do printf '%s -> ' "$u"; curl -s "$u" | grep -o 'rel="canonical" href="[^"]*"' | head -1; done
+      ```
+- [ ] www 301s to the apex: `curl -sI https://www.gmojsoski.com/ | head -1`
+      returns `301`, not `200`. Two hosts serving the same bytes is a duplicate.
+- [ ] A miss is a real 404, not the homepage:
+      `curl -sI https://gmojsoski.com/definitely-not-a-page | head -1` returns
+      `404`. Then load it in a browser: the styled 404 page, no console errors
+      (a React #418 there means `404.html` was not the file served).
+- [ ] The 404 response still carries the CSP and the other security headers.
+      They are repeated inside the error handler because an error route inherits
+      nothing: `curl -sI https://gmojsoski.com/definitely-not-a-page | grep -i -E 'content-security|strict-transport'`.
 - [ ] `/sitemap.xml`, `/rss.xml` and `/robots.txt` all return 200.
 - [ ] Structured data passes: run the homepage and one post through Google's
       Rich Results Test and Schema.org's validator. Both should report a
