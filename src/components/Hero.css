@@ -192,6 +192,10 @@
   color: var(--signal);
 }
 .menu__nav {
+  /* Rows the height budget below is divided between: the NAV entries in
+     Hero.tsx plus the Resume link. Keep in sync when NAV changes. Getting it
+     wrong only costs the scroll fallback, never a clipped entry. */
+  --menu-rows: 8;
   flex: 1;
   /* Without this a flex child will not shrink below its content, so a nav
      taller than the viewport overflowed the fixed overlay with no way to
@@ -219,7 +223,22 @@
   padding: clamp(12px, 2vw, 22px) 0;
   border-bottom: 1px solid var(--hairline-faint);
   font-weight: 800;
-  font-size: clamp(28.5px, 5.7vw, 68.4px);
+  /* Three competing limits, smallest wins:
+       5.7vw          the original width-driven scale, which is what mobile and
+                      tablet still get (it lands under the floor on a phone)
+       height budget  what one row may occupy for the whole index to fit without
+                      scrolling: the overlay height minus the bar, split across
+                      --menu-rows, minus the 45px a row adds around its text
+                      (2 x 22px padding + 1px rule) at the desktop padding cap
+       68.4px         the ceiling, so a tall window does not inflate the type
+     Below 720px wide the padding cap has not kicked in yet, so the 45px
+     over-subtracts and the type comes out a little smaller than it strictly
+     needs to be. That errs toward fitting, which is the safe direction. */
+  font-size: clamp(
+    28.5px,
+    min(5.7vw, calc((100vh - 64px) / var(--menu-rows) - 45px)),
+    68.4px
+  );
   line-height: 1;
   letter-spacing: -0.03em;
   text-transform: uppercase;
