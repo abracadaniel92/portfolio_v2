@@ -43,7 +43,7 @@ const ROLES: Role[] = [
     dates: "Mar 2023 – Nov 2025",
     note: "US clean-energy tech building data and billing infrastructure for renewable energy.",
     bullets: [
-      "Drove modernization across 150+ engineers; owned the SOC 2 program, a $3M AWS budget, and platform reliability.",
+      "Drove modernization across 150+ engineers; ran the SOC 2 program, a $3M AWS budget, and platform reliability.",
       "Led a 10-engineer DevOps team and built the multi-year tech roadmap with engineering and product leadership.",
       "Cut AWS spend with workload-level cost measures and no performance hit; led application rationalization and vendor consolidation.",
     ],

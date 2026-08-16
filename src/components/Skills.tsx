@@ -82,7 +82,7 @@ const PILLARS = [
     no: "D",
     title: "How I secure & comply",
     tag: "Security · Compliance · Identity",
-    line: "Owned the SOC 2 program at Arcadia. Day-to-day across identity, zero-trust networking, and audit tooling.",
+    line: "Ran the SOC 2 program at Arcadia. Day-to-day across identity, zero-trust networking, and audit tooling.",
     groups: [
       { label: "Compliance", items: ["SOC 2", "Vanta", "AuditBoard"] },
       { label: "Security", items: ["CrowdStrike", "Proofpoint", "Fail2ban"] },
