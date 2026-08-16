@@ -71,7 +71,7 @@ const ROLES: Role[] = [
     bullets: [
       "Scaled a 35-person delivery org across 6 teams; €2M+ revenue from clients like Erasmus+, PEGI and D'Ieteren.",
       "Grew the development org 40% and ran 17 concurrent projects through platform consolidation and M&A integrations.",
-      "Promoted from Technical PM after lifting delivery predictability ~20%, shipping e-commerce and ad-tech platforms.",
+      "Promoted from Technical PM after lifting delivery efficiency 20%, shipping e-commerce and ad-tech platforms.",
     ],
   },
   {
