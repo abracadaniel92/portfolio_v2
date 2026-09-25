@@ -45,7 +45,7 @@ function Footer() {
           </a>
           <a
             className="footer__call"
-            href="https://koalendar.com/e/meet-with-goce"
+            href="https://cal.gmojsoski.com/gmojsoski"
             target="_blank"
             rel="noopener noreferrer"
           >

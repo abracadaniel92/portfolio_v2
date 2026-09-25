@@ -24,7 +24,7 @@ const SOCIALS: {
   },
   {
     label: "Book a call",
-    href: "https://koalendar.com/e/meet-with-goce",
+    href: "https://cal.gmojsoski.com/gmojsoski",
     path: "M3 4h18v18H3z M16 2v4 M8 2v4 M3 10h18",
   },
   {

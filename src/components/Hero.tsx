@@ -108,7 +108,7 @@ function Hero() {
             </a>
             <a
               className="hero__btn hero__btn--secondary"
-              href="https://koalendar.com/e/meet-with-goce"
+              href="https://cal.gmojsoski.com/gmojsoski"
               target="_blank"
               rel="noopener noreferrer"
             >
