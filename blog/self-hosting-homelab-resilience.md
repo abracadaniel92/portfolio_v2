@@ -69,6 +69,23 @@ job. They do it continuously, whether or not anyone asks, and running
 my own is the only reason I have ever had to think about the
 difference at all.
 
+**Update, October 2026.** The backup paragraph above was wrong on the
+day I published it. "The backup runs automatically" had not been true
+since January: a space in a folder path had killed the backup job and
+the health check that should have noticed, and the newest copy of the
+vault was from 28 January. I found it in September, by accident. That
+story is [its own post](/blog/space-in-path-killed-homelab-automation).
+
+Since then all five backed-up services have had a restore drill into a
+clean, throwaway container. The vault came back with 603 of 603
+entries. Linkwarden failed: its archives were 16 MB of valid gzip with
+no database inside, because the backup user could not read the Postgres
+folder and the error went to `/dev/null`. Three layers of checks I had
+added the day before all passed it. The offsite copy is now encrypted
+before it leaves the box and checked hourly. "Exactly once" is now a
+script I rerun after every upgrade, which is the paragraph I should have
+been able to write the first time.
+
 Then there is the one that actually broke. A Raspberry Pi running
 Pi-hole handled DNS for the entire house. When the Pi died, nobody
 living here could reach anything. Not a slow page or a degraded
