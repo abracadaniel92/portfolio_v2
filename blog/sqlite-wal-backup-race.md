@@ -1,6 +1,6 @@
 ---
 title: "Stopping the container before backing up SQLite still left seven weeks out of my Vaultwarden backup"
-date: 2026-10-08
+date: 2026-09-30
 company: "Homelab"
 summary: "My backup stopped Vaultwarden, tarred the SQLite file and skipped the WAL, on the assumption that shutdown had already folded the WAL in. It hadn't. The archive was missing seven weeks of data."
 ---

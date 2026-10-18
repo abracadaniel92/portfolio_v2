@@ -184,6 +184,15 @@ post, rename its heading here too.
   restarts is presented as unverified, not as evidence the redundancy
   worked, per the author's own correction during drafting.
 
+## sqlite-wal-backup-race.md
+
+- Published 2026-10-18 from `drafts/`, backdated to 2026-09-30 to fill the
+  September gap (the incident was 2026-09-25). Not a text-checker-en pass.
+- Facts checked against the lenovo-homelab log (2026-09-25 Vaultwarden entry
+  and the 2026-09-26 verification): 598 vs 603 ciphers, newest 2026-08-03 vs
+  2026-09-25, stop/tar/start inside one second, 424 KB WAL excluded by
+  pattern, online backup API as the fix. All accurate.
+
 ## Skill changes from the 2026-08-08 review pass
 
 The drafts exposed four gaps in the skills themselves. All four are fixed
