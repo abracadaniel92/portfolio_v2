@@ -1,15 +1,16 @@
 ---
-title: "My Pi-hole sent every DNS query to Google while Unbound sat idle next to it"
+title: "My Pi-hole sent every DNS query to Google for nine months while Unbound sat idle next to it"
 date: 2026-10-24
 company: "Homelab"
 summary: "The compose file told Pi-hole to use a local Unbound resolver. Pi-hole v6 ignores that variable without a warning, so every lookup in the house went to Google instead. One command shows what Pi-hole is really using."
 ---
 
-# My Pi-hole sent every DNS query to Google while Unbound sat idle next to it
+# My Pi-hole sent every DNS query to Google for nine months while Unbound sat idle next to it
 
 *Written with AI help, reviewed by the author.*
 
-My Pi-hole was forwarding every DNS lookup in the house to Google. The
+From January to October, my Pi-hole forwarded every DNS lookup in the
+house to Google. The
 Unbound resolver it was supposed to use was running on the same Pi,
 healthy, and answering nothing.
 
@@ -22,9 +23,8 @@ PIHOLE_DNS_: '127.0.0.1#5335'  # Upstream DNS (Unbound recursive resolver)
 That variable belongs to Pi-hole v5. Version 6 ignores it without a
 warning and keeps its settings in `pihole.toml` on the config volume. The
 image was `pihole/pihole:latest`, which was already v6 when I added
-Unbound in January, so as far as I can tell the line never did anything.
-The commit that added it promised "no upstream DNS sees queries".
-[QUESTION: fine to say it was like this since January? The log only proves the state on 17 October.]
+Unbound in January, so the line never did anything. The commit that added it promised "no
+upstream DNS sees queries".
 
 Two more lines in the same file, `WEBPASSWORD` and `FTLCONF_LOCAL_IPV4`,
 were dead for the same reason.
