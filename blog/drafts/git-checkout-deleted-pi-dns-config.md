@@ -1,6 +1,6 @@
 ---
 title: "A git checkout deleted the config file my Pi's DNS resolver was running from"
-date: 2026-10-31
+date: 2026-11-03
 company: "Homelab"
 summary: "Unbound on my Raspberry Pi reads its config straight out of a git checkout. A branch switch deleted that file while Unbound was still running, and the next restart would have taken DNS down for every device on the network."
 ---
@@ -23,8 +23,8 @@ straight out of my homelab repo:
 My own commit on `main` had moved the Pi's stacks from `docker/unbound/` to
 `pihole/docker/unbound/`. The Pi's checkout was still on `develop`, so
 switching it to `main` removed the old file. The container kept serving,
-because a process that already has a file open keeps reading it after the
-file is deleted. The next restart or reboot would have gone differently.
+because Unbound reads its config once at startup and the mount still
+pointed at the deleted file. The next restart or reboot would have gone differently.
 Docker would have created an empty directory at the missing path, Unbound
 would have failed to start, and Pi-hole would have stopped resolving for
 every device on the network.
