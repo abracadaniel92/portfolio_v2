@@ -1,6 +1,6 @@
 ---
 title: "My Pi-hole sent every DNS query to Google for nine months while Unbound sat idle next to it"
-date: 2026-10-24
+date: 2026-10-21
 company: "Homelab"
 summary: "The compose file told Pi-hole to use a local Unbound resolver. Pi-hole v6 ignores that variable without a warning, so every lookup in the house went to Google instead. One command shows what Pi-hole is really using."
 ---
