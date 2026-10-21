@@ -193,6 +193,16 @@ post, rename its heading here too.
   2026-09-25, stop/tar/start inside one second, 424 KB WAL excluded by
   pattern, online backup API as the fix. All accurate.
 
+## pihole-v6-ignored-unbound-upstream.md
+
+- Published 2026-10-21 from `drafts/` (planned date 2026-10-24, moved to the
+  publish day so the post isn't future-dated). Not a text-checker-en pass.
+- Facts checked against the lenovo-homelab Pi log (2026-10-17 entry) and git
+  history: Unbound added in d56e4ee on 2026-01-17 with "no upstream DNS sees
+  queries" in the message, image `pihole/pihole:latest`, the three v5
+  variables, `[ 8.8.8.8, 8.8.4.4 ]`, the `ad` flag, SERVFAIL, 12 domains in
+  55 to 260 ms. All accurate. No LAN IPs.
+
 ## Skill changes from the 2026-08-08 review pass
 
 The drafts exposed four gaps in the skills themselves. All four are fixed
