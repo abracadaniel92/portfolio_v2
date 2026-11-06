@@ -4,6 +4,24 @@ Static SPA. `npm run build` emits `dist/` (plain HTML/CSS/JS + assets) — serve
 it as static files. Target: Caddy on the homelab, domain `gmojsoski.com` (this
 replaces the previous portfolio at that domain).
 
+## Cloudflare Pages (target since 2026-11)
+
+Connect `abracadaniel92/portfolio_v2` in the Pages dashboard:
+
+- Production branch `main`, build command `npm run build`, output dir `dist`.
+- Custom domain: `gmojsoski.com` (apex only). `www` stays on the homelab
+  tunnel, where Caddy 301s it to the apex.
+- Headers come from `public/_headers` (copied into `dist/`). Keep its CSP in
+  step with the Caddy block below while Caddy is the fallback.
+- Pages serves `dist/404.html` with a 404 status for any miss, because a
+  top-level `404.html` exists. Without it Pages would fall back to the homepage
+  at 200 (a soft 404), so that file is load-bearing here too.
+- Pages redirects a directory index (`/blog/x` to `/blog/x/`), which is why the
+  prerender writes flat `blog.html` and `blog/<slug>.html` files instead.
+
+Before switching the domain, run the post-deploy checklist below against the
+`*.pages.dev` preview URL (swap the host in each command).
+
 ## Build
 
 ```bash
@@ -15,7 +33,7 @@ npm run build      # outputs dist/
 `og-image.png`, `site.webmanifest`, and `files/GoceMojsoskiCV.pdf`.
 
 Since the blog landed, the build also emits one prerendered page per route:
-`dist/blog/index.html` and `dist/blog/<slug>/index.html` for each post, plus
+`dist/blog.html` and `dist/blog/<slug>.html` for each post, plus
 `sitemap.xml` and `rss.xml` at the root (`robots.txt` ships from `public/`).
 
 ## Caddy
@@ -33,7 +51,7 @@ gmojsoski.com {
     root * /srv/portfolio/dist
     encode zstd gzip
     file_server
-    # {path}/index.html is REQUIRED, not an optimisation. It resolves /blog and
+    # {path}.html is REQUIRED, not an optimisation. It resolves /blog and
     # /blog/<slug> to their prerendered files. Without it every one of those URLs
     # falls through and serves the homepage at 200, so the whole blog reads as
     # duplicate content.
@@ -41,7 +59,7 @@ gmojsoski.com {
     # There is deliberately NO /index.html fallback at the end. With one, every
     # unknown URL answers 200 with the homepage, which Google reads as a soft
     # 404. Without it, a miss reaches handle_errors below.
-    try_files {path} {path}/index.html
+    try_files {path} {path}.html
 
     header {
         # HTTPS only, one year, include subdomains

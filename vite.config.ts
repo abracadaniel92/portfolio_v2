@@ -4,16 +4,14 @@ import { existsSync, readFileSync } from 'node:fs'
 import { resolve, sep } from 'node:path'
 
 /**
- * Makes `vite preview` resolve URLs the way the production server does, for both
- * directory indexes and misses.
+ * Makes `vite preview` resolve URLs the way production (Cloudflare Pages, and
+ * Caddy's `try_files {path} {path}.html`) does, for both pages and misses.
  *
- * Vite's html fallback looks for `<url>.html` and, failing that, rewrites to
- * `/index.html`. That is wrong twice over here. The blog prerenders to
- * `dist/blog/<slug>/index.html`, so `/blog/<slug>` matched neither: preview
- * served the homepage, the client then hydrated it as a post, and React threw a
- * hydration mismatch (error #418). And an unknown path fell back to the
- * homepage at 200, which is exactly the soft 404 that Caddy's error handler and
- * `dist/404.html` now exist to avoid.
+ * The blog prerenders to `dist/blog.html` and `dist/blog/<slug>.html`, served
+ * at the bare path. This middleware maps `/blog/<slug>` to its `.html` file
+ * explicitly rather than trusting Vite's html fallback, and turns an unknown
+ * path into `dist/404.html` with a real 404 instead of the homepage at 200 (a
+ * soft 404, and a React #418 hydration mismatch on a post URL).
  *
  * Preview only. The dev server has no `dist/`, and still needs the SPA fallback
  * so `/blog` renders client-side there.
@@ -33,12 +31,9 @@ function previewDirectoryIndex(): Plugin {
         const target = resolve(outDir, `.${decodeURIComponent(pathname)}`)
         if (!inside(target)) return next()
 
-        if (!pathname.endsWith('/')) {
-          const index = resolve(target, 'index.html')
-          if (existsSync(index)) {
-            req.url = `${pathname}/index.html${search}`
-            return next()
-          }
+        if (!pathname.endsWith('/') && existsSync(`${target}.html`)) {
+          req.url = `${pathname}.html${search}`
+          return next()
         }
 
         // A real file, or a directory Vite will serve the index of.

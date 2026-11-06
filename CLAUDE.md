@@ -6,6 +6,8 @@ that aren't obvious from it.
 
 ## Deploy pipeline (the most important thing to know)
 
+- **Moving to Cloudflare Pages (2026-11):** Pages builds `main` on push, so
+  once the domain points there every push to `main` deploys. See DEPLOY.md.
 - GitHub remote is `abracadaniel92/portfolio_v2`. The homelab server
   (`lemongrab`) pulls **`main`**, runs `npm run build`, and syncs `dist/` into
   Caddy via `update-portfolio.sh` (triggered by `make portfolio-update` or the

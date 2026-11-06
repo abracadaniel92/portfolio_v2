@@ -5,11 +5,15 @@
 //
 // Routes:
 //   /              -> dist/index.html
-//   /blog          -> dist/blog/index.html
-//   /blog/<slug>   -> dist/blog/<slug>/index.html
+//   /blog          -> dist/blog.html
+//   /blog/<slug>   -> dist/blog/<slug>.html
 //   (unmatched)    -> dist/404.html
 //
-// Caddy resolves the first three with `try_files {path} {path}/index.html` and
+// Flat `<path>.html` files, not `<path>/index.html`, because Cloudflare Pages
+// 307s `/blog/<slug>` to `/blog/<slug>/` for a directory index, which breaks
+// every canonical and sitemap URL. A flat file is served at the bare path, 200.
+//
+// Caddy resolves the first three with `try_files {path} {path}.html` and
 // serves 404.html from its error handler for anything else, with a real 404
 // status. That `try_files` deliberately has no `/index.html` at the end: with
 // one, every unknown URL answered 200 with the homepage instead.
@@ -76,7 +80,7 @@ const routes = [
   },
   {
     path: "/blog",
-    out: "blog/index.html",
+    out: "blog.html",
     title: BLOG_TITLE,
     socialTitle: BLOG_TITLE,
     description: BLOG_DESCRIPTION,
@@ -84,7 +88,7 @@ const routes = [
   },
   ...posts.map((post) => ({
     path: `/blog/${post.slug}`,
-    out: `blog/${post.slug}/index.html`,
+    out: `blog/${post.slug}.html`,
     title: `${post.title} · Goce Mojsoski`,
     socialTitle: post.title,
     description: post.summary,
