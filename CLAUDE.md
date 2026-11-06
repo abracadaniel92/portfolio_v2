@@ -6,8 +6,10 @@ that aren't obvious from it.
 
 ## Deploy pipeline (the most important thing to know)
 
-- **Moving to Cloudflare Pages (2026-11):** Pages builds `main` on push, so
-  once the domain points there every push to `main` deploys. See DEPLOY.md.
+- **Live on Cloudflare Workers static assets since 2026-11-06** (project
+  `my-portfolio`, config `wrangler.jsonc`). Every push to `main` builds and
+  deploys to gmojsoski.com. The homelab Caddy copy below is now only a
+  fallback. See DEPLOY.md.
 - GitHub remote is `abracadaniel92/portfolio_v2`. The homelab server
   (`lemongrab`) pulls **`main`**, runs `npm run build`, and syncs `dist/` into
   Caddy via `update-portfolio.sh` (triggered by `make portfolio-update` or the
