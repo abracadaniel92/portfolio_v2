@@ -4,23 +4,27 @@ Static SPA. `npm run build` emits `dist/` (plain HTML/CSS/JS + assets) — serve
 it as static files. Target: Caddy on the homelab, domain `gmojsoski.com` (this
 replaces the previous portfolio at that domain).
 
-## Cloudflare Pages (target since 2026-11)
+## Cloudflare (target since 2026-11)
 
-Connect `abracadaniel92/portfolio_v2` in the Pages dashboard:
+Runs as a **Workers static-assets project** (`my-portfolio`), not classic Pages:
+the dashboard's Workers flow, Git-connected to `abracadaniel92/portfolio_v2`.
+`wrangler.jsonc` is committed so `wrangler deploy` uses it instead of its
+auto-setup, which rewrote `vite.config.ts` and chose SPA mode (soft 404s).
+Serving rules below are the same on Workers assets and Pages.
 
-- Production branch `main`, build command `npm run build`, output dir `dist`.
+- Production branch `main`, build command `npm run build`, deploy command
+  `npx wrangler deploy`. Output dir and 404 handling live in `wrangler.jsonc`.
 - Custom domain: `gmojsoski.com` (apex only). `www` stays on the homelab
   tunnel, where Caddy 301s it to the apex.
 - Headers come from `public/_headers` (copied into `dist/`). Keep its CSP in
   step with the Caddy block below while Caddy is the fallback.
-- Pages serves `dist/404.html` with a 404 status for any miss, because a
-  top-level `404.html` exists. Without it Pages would fall back to the homepage
-  at 200 (a soft 404), so that file is load-bearing here too.
+- `not_found_handling: "404-page"` serves `dist/404.html` with a 404 status
+  for any miss. SPA mode would answer 200 with the homepage (a soft 404).
 - Pages redirects a directory index (`/blog/x` to `/blog/x/`), which is why the
   prerender writes flat `blog.html` and `blog/<slug>.html` files instead.
 
 Before switching the domain, run the post-deploy checklist below against the
-`*.pages.dev` preview URL (swap the host in each command).
+`*.workers.dev` URL (swap the host in each command).
 
 ## Build
 
