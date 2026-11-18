@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ScrollTop from "./ScrollTop";
 import "./Footer.css";
 
 const SOCIALS: { label: string; href: string; download?: boolean }[] = [
@@ -53,23 +54,26 @@ function Footer() {
           </a>
         </div>
 
-        <ul className="footer__links">
-          {SOCIALS.map((s) =>
-            s.download ? (
-              <li key={s.label}>
-                <a className="footer__link--resume" href={s.href} download>
-                  {s.label}
-                </a>
-              </li>
-            ) : (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer">
-                  {s.label} ↗
-                </a>
-              </li>
-            )
-          )}
-        </ul>
+        <div className="footer__bottom">
+          <ul className="footer__links">
+            {SOCIALS.map((s) =>
+              s.download ? (
+                <li key={s.label}>
+                  <a className="footer__link--resume" href={s.href} download>
+                    {s.label}
+                  </a>
+                </li>
+              ) : (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer">
+                    {s.label} ↗
+                  </a>
+                </li>
+              ),
+            )}
+          </ul>
+          <ScrollTop />
+        </div>
       </div>
 
       <div className="footer__colophon">

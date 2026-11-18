@@ -1,8 +1,8 @@
 import "./ScrollTop.css";
 
-/** "Back to top" arrow at the very end of every page (after the footer, or
- *  after a post's newer/older nav). Static, not floating: it only shows once
- *  the reader has reached the bottom. Respects reduced motion on click. */
+/** "Back to top" arrow. Static, not floating: it sits at the right end of the
+ *  contact links row in the footer, and in its own row after a post's
+ *  newer/older nav (posts have no footer). Respects reduced motion on click. */
 function ScrollTop() {
   const toTop = () => {
     const reduced = window.matchMedia(
@@ -12,16 +12,14 @@ function ScrollTop() {
   };
 
   return (
-    <div className="to-top-row">
-      <button
-        type="button"
-        className="to-top"
-        aria-label="Back to top"
-        onClick={toTop}
-      >
-        <span aria-hidden="true">↑</span>
-      </button>
-    </div>
+    <button
+      type="button"
+      className="to-top"
+      aria-label="Back to top"
+      onClick={toTop}
+    >
+      <span aria-hidden="true">↑</span>
+    </button>
   );
 }
 

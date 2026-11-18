@@ -74,7 +74,11 @@ function App({ route }: { route: Route }) {
       {/* A post ends on its own newer/older nav. The contact pitch belongs on
           the homepage and the blog index, not at the foot of every article. */}
       {route.kind !== "post" && <Footer />}
-      <ScrollTop />
+      {route.kind === "post" && (
+        <div className="to-top-row">
+          <ScrollTop />
+        </div>
+      )}
     </>
   );
 }

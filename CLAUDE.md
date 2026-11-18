@@ -175,8 +175,9 @@ Pipeline:
   throws if two headings in one post collide.
 - **The contact footer is omitted on individual posts** (see the route check in
   `App.tsx`). A post ends on its newer/older nav. It stays on `/blog` and the
-  homepage. `ScrollTop` is a static ↑ row rendered last on every route (after
-  the footer, or after a post's nav), not a floating button.
+  homepage. `ScrollTop` is a static ↑ button, not a floating one: at the right
+  end of the footer's links row (`.footer__bottom`), and in its own
+  `.to-top-row` after a post's nav, since posts have no footer.
 - `/blog` leads with a masthead (`.blog-index__head`), not the mono
   `.section__head` the homepage sections use, because it is a page rather than
   a section of one. It is deliberately not in `REVEAL_SELECTOR`: a page title
