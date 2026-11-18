@@ -4,19 +4,28 @@
 
 .pillar {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: clamp(16px, 4vw, 64px);
   padding: clamp(28px, 4vw, 48px) 0;
   border-bottom: 1px solid var(--hairline-faint);
 }
 
+/* Letter on the title's line; the tagline sits under the title. */
+.pillar__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  align-content: start;
+}
+.pillar__tag {
+  grid-column: 2;
+}
 .pillar__no {
-  display: block;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 1px;
   color: var(--signal);
-  margin-bottom: 10px;
 }
 .pillar__title {
   font-weight: 700;

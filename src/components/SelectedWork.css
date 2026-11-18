@@ -188,14 +188,16 @@
   }
 }
 @media (max-width: 640px) {
+  /* Number stays on the company's line; the year drops under the name. */
   .work-row__header {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
   }
   .work-row__no {
     padding-top: 0;
   }
   .work-row__year {
+    grid-column: 2;
     text-align: left;
     margin-top: 12px;
   }

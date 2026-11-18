@@ -46,11 +46,12 @@
   background: var(--surface);
 }
 
+/* Square, title and links on one line. */
 .lab-card__top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 .lab-card__dir {
   color: var(--signal);
@@ -75,7 +76,8 @@
   font-size: clamp(18px, 1.8vw, 22px);
   letter-spacing: -0.01em;
   color: var(--ink);
-  margin-bottom: 10px;
+  flex: 1;
+  min-width: 0;
 }
 .lab-card__blurb {
   flex: 1;
@@ -167,8 +169,22 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+.lab__more-count--narrow {
+  display: none;
+}
 @media (max-width: 560px) {
   .lab__grid {
     grid-template-columns: 1fr;
+  }
+  /* Single column on phones: 3 cards before "Show more" instead of 6.
+     Done in CSS, not JS, so the prerendered page does not jump on load. */
+  .lab__grid--collapsed .lab-card:nth-child(n + 4) {
+    display: none;
+  }
+  .lab__more-count--wide {
+    display: none;
+  }
+  .lab__more-count--narrow {
+    display: inline;
   }
 }

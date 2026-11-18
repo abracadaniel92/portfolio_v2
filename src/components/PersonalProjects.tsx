@@ -109,13 +109,14 @@ function PersonalProjects() {
         <span className="section__meta">Self-hosted on a ThinkCentre</span>
       </div>
 
-      <div className="lab__grid">
+      <div className={`lab__grid${showAll ? "" : " lab__grid--collapsed"}`}>
         {visible.map((p) => (
           <article className="lab-card" key={p.name}>
             <div className="lab-card__top">
               <span className="lab-card__dir" aria-hidden="true">
                 ▢
               </span>
+              <h3 className="lab-card__name">{p.name}</h3>
               <div className="lab-card__links">
                 {p.live && (
                   <a href={p.live} target="_blank" rel="noopener noreferrer">
@@ -124,7 +125,6 @@ function PersonalProjects() {
                 )}
               </div>
             </div>
-            <h3 className="lab-card__name">{p.name}</h3>
             <p className="lab-card__blurb">{p.desc}</p>
             <div className="lab-card__tags">
               {p.tags.map((t) => (
@@ -140,7 +140,13 @@ function PersonalProjects() {
       {!showAll && (
         <button className="lab__more" onClick={() => setShowAll(true)}>
           Show more
-          <span className="lab__more-count">[+{HOMELAB.length - 6}]</span>
+          {/* Phones show 3 cards before "Show more", wider screens 6 (CSS). */}
+          <span className="lab__more-count lab__more-count--wide">
+            [+{HOMELAB.length - 6}]
+          </span>
+          <span className="lab__more-count lab__more-count--narrow">
+            [+{HOMELAB.length - 3}]
+          </span>
         </button>
       )}
 
