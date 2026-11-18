@@ -1,4 +1,4 @@
-/* Last row of every page: one arrow, right-aligned on the content edge. */
+/* Posts only (no footer): the arrow's own row after the newer/older nav. */
 .to-top-row {
   display: flex;
   justify-content: flex-end;
