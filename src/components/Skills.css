@@ -28,7 +28,7 @@
 .pillar__tag {
   margin-top: 10px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -47,7 +47,7 @@
 }
 .pillar__group-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--ink-faint);

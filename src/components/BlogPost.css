@@ -63,7 +63,7 @@
 
 .post__rail-label {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 1.6px;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -93,7 +93,7 @@
 }
 .post__contents-no {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 1px;
   color: var(--signal);
   padding-top: 0.2em;
@@ -105,7 +105,7 @@
 }
 .post__spec dt {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -237,7 +237,7 @@
   left: -26px;
   top: 0.15em;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.5px;
   color: var(--signal);
 }

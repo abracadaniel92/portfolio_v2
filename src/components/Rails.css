@@ -60,7 +60,7 @@
 .rail__email {
   writing-mode: vertical-rl;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.5px;
   color: var(--ink-faint);
 }

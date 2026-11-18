@@ -98,6 +98,17 @@
 .topbar__meta {
   color: var(--ink-dim);
 }
+.topbar > * {
+  white-space: nowrap;
+}
+/* The two meta labels are decoration: below ~960px all six items no longer
+   fit on one line, so they go first. Class-based, not nth-child: the topbar
+   gains and loses items over time and positional rules silently retarget. */
+@media (max-width: 960px) {
+  .topbar__meta {
+    display: none;
+  }
+}
 /* Navigation, not a call to action: stays on the neutral ramp so the topbar
    keeps exactly two signal elements (Resume and the menu button). */
 .topbar__link {
@@ -109,7 +120,7 @@
 }
 .topbar__menu {
   color: var(--ink);
-  background: rgba(210, 64, 46, 0.08);
+  background: rgba(213, 76, 59, 0.08);
   border: 1px solid var(--signal);
   font: inherit;
   letter-spacing: inherit;
@@ -128,7 +139,7 @@
   color: #0b0b0a;
   background: var(--signal);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
+  box-shadow: 0 4px 14px rgba(213, 76, 59, 0.35);
 }
 .topbar__resume {
   background: var(--signal);
@@ -150,7 +161,7 @@
   background: #f0764a;
   border-color: #f0764a;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
+  box-shadow: 0 4px 14px rgba(213, 76, 59, 0.35);
 }
 .topbar__resume:focus-visible {
   outline: 2px solid var(--ink);
@@ -173,7 +184,7 @@
   padding: 18px var(--pad);
   border-bottom: 1px solid var(--hairline);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -296,7 +307,7 @@
   left: clamp(14px, 1.6vw, 26px);
   bottom: clamp(44px, 7vh, 80px);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--ink);
@@ -453,7 +464,9 @@
   margin-top: clamp(22px, 2.7vw, 36px);
 }
 .hero__btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-family: var(--mono);
   font-size: clamp(11px, 1.2vw, 12.5px);
   letter-spacing: 1.2px;
@@ -478,7 +491,7 @@
   background: #f0764a;
   border-color: #f0764a;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(210, 64, 46, 0.35);
+  box-shadow: 0 4px 14px rgba(213, 76, 59, 0.35);
 }
 .hero__btn--secondary {
   color: var(--ink);
@@ -502,7 +515,7 @@
   padding: 16px var(--pad);
   border-top: 1px solid var(--hairline);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -519,11 +532,6 @@
     mask-image: linear-gradient(0deg, transparent 6%, #000 60%);
   }
   .spine {
-    display: none;
-  }
-  /* Class-based, not nth-child: the topbar gains and loses items over time and
-     positional rules silently retarget when it does. */
-  .topbar__meta {
     display: none;
   }
   /* Brand + Blog + Resume + menu overflows a 360px bar. Resume gives up its

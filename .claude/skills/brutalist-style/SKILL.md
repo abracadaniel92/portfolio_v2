@@ -19,7 +19,7 @@ the how-to that keeps changes on-system. Pull the concrete numbers from:
 
 ## The non-negotiables (memorize these five)
 
-1. **One accent, ever.** `--signal` (`#d2402e`) is the only color that is not on
+1. **One accent, ever.** `--signal` (`#d54c3b`) is the only color that is not on
    the bone/concrete neutral ramp. Never add a second accent, never "brighten"
    or theme the palette. Squares, section numbers, one group label per pillar,
    and CTAs are the only things that carry it.

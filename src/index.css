@@ -3,11 +3,11 @@
   --surface: #131311;
   --ink: #e8e4dc;
   --ink-dim: #9a9a92;
-  --ink-faint: #6e6e68;
+  --ink-faint: #7f7f79; /* 4.9:1 on canvas, 4.6:1 on surface (was #6e6e68 at 3.8:1) */
   --hairline: #2a2a27;
   --hairline-faint: #1c1c1a;
   --steel: #4a4a46;
-  --signal: #d2402e;
+  --signal: #d54c3b;
 
   --display: "Archivo", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -31,6 +31,14 @@
   }
 }
 
+/* Very wide screens: cap the content at 1520px and centre it, so the gutters
+   grow instead of the measure (1920px used to leave the hero 91px from the edge). */
+@media (min-width: 1720px) {
+  :root {
+    --pad: calc((100vw - 1520px) / 2);
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -41,7 +49,31 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
+  /* Belt and braces with body's clip: nothing can pan the page sideways. */
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduced motion: hover lifts and fades land instantly. Animations are already
+   opt-in per component; this catches the unguarded transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Default keyboard focus ring. Components with their own :focus-visible
+   (Resume, the work rows, to-top, 404 link) override it. */
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }
 
 body {
