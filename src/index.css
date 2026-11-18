@@ -31,6 +31,14 @@
   }
 }
 
+/* Very wide screens: cap the content at 1520px and centre it, so the gutters
+   grow instead of the measure (1920px used to leave the hero 91px from the edge). */
+@media (min-width: 1720px) {
+  :root {
+    --pad: calc((100vw - 1520px) / 2);
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -41,7 +49,31 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
+  /* Belt and braces with body's clip: nothing can pan the page sideways. */
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduced motion: hover lifts and fades land instantly. Animations are already
+   opt-in per component; this catches the unguarded transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Default keyboard focus ring. Components with their own :focus-visible
+   (Resume, the work rows, to-top, 404 link) override it. */
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }
 
 body {
