@@ -3,11 +3,11 @@
   --surface: #131311;
   --ink: #e8e4dc;
   --ink-dim: #9a9a92;
-  --ink-faint: #6e6e68;
+  --ink-faint: #7f7f79; /* 4.9:1 on canvas, 4.6:1 on surface (was #6e6e68 at 3.8:1) */
   --hairline: #2a2a27;
   --hairline-faint: #1c1c1a;
   --steel: #4a4a46;
-  --signal: #d2402e;
+  --signal: #d54c3b;
 
   --display: "Archivo", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;

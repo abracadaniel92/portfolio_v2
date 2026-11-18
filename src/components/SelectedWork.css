@@ -80,7 +80,7 @@
   border: 1px solid var(--signal);
   color: var(--signal);
   padding: 9px 16px;
-  background: rgba(210, 64, 46, 0.06);
+  background: rgba(213, 76, 59, 0.06);
   transition:
     background 0.2s ease,
     color 0.2s ease;
@@ -130,7 +130,7 @@
   transition: background 0.2s ease;
 }
 .wp--link:hover {
-  background: rgba(210, 64, 46, 0.06);
+  background: rgba(213, 76, 59, 0.06);
 }
 .wp--link:hover .wp__name,
 .wp--link:hover .wp__link {
@@ -173,7 +173,7 @@
 }
 .wp__tag {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--ink-faint);

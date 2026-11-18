@@ -13,11 +13,11 @@ to invent a literal.
 | `--surface` | `#131311` | raised gray blocks, insets |
 | `--ink` | `#e8e4dc` | bone: display headings and primary body text |
 | `--ink-dim` | `#9a9a92` | secondary text (body paragraphs, descriptions) |
-| `--ink-faint` | `#6e6e68` | tertiary text: most mono labels, meta, captions |
+| `--ink-faint` | `#7f7f79` | tertiary text: most mono labels, meta, captions |
 | `--steel` | `#4a4a46` | hover border lift, subtle interactive states |
 | `--hairline` | `#2a2a27` | primary 1px borders (section head underline) |
 | `--hairline-faint` | `#1c1c1a` | quieter internal rules (between rows/cards) |
-| `--signal` | `#d2402e` | THE accent. Squares, section numbers, CTAs, one label |
+| `--signal` | `#d54c3b` | THE accent. Squares, section numbers, CTAs, one label |
 
 Rules:
 

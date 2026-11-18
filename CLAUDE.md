@@ -50,7 +50,7 @@ drive that.
    only; sharp/png-to-ico are devDeps for the favicon script, and `marked` is a
    devDep used only by the blog build step. Nothing parses markdown in the
    browser.
-5. **One accent color.** `--signal` (`#d2402e`) is the only accent; everything
+5. **One accent color.** `--signal` (`#d54c3b`) is the only accent; everything
    else is the bone/concrete neutral ramp in `src/index.css`. Never introduce
    a second accent or "improve" the palette.
 6. **OG/social URLs stay absolute** (`https://gmojsoski.com/...`) in

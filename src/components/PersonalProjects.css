@@ -60,7 +60,7 @@
   display: flex;
   gap: 10px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1px;
 }
 .lab-card__links a {
@@ -141,11 +141,13 @@
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 1px;
-  color: var(--signal);
+  /* Neutral like .topbar__link: red on the --surface panel is only 4.3:1. */
+  color: var(--ink);
   white-space: nowrap;
+  transition: color 0.2s ease;
 }
 .homelab__gh:hover {
-  color: #f0764a;
+  color: var(--signal);
 }
 .homelab__copy {
   max-width: 74ch;

@@ -67,8 +67,8 @@ markers are driven by `.section__no` / `section__lead` in `App.css`.
 | `--canvas` | `#0b0b0a` | page background |
 | `--surface` | `#131311` | gray blocks |
 | `--ink` | `#e8e4dc` | bone display/body text |
-| `--ink-dim` / `--ink-faint` | `#9a9a92` / `#6e6e68` | secondary / tertiary text |
-| `--signal` | `#d2402e` | the single accent (squares, numbers, CTAs) |
+| `--ink-dim` / `--ink-faint` | `#9a9a92` / `#7f7f79` | secondary / tertiary text |
+| `--signal` | `#d54c3b` | the single accent (squares, numbers, CTAs) |
 | `--hairline` / `--hairline-faint` | `#2a2a27` / `#1c1c1a` | rules & borders |
 
 Type families: `--display` (Archivo), `--mono` (IBM Plex Mono), `--serif`
