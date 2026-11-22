@@ -4,9 +4,38 @@
 }
 
 .footer__inner {
-  max-width: 1600px;
+  position: relative;
+  overflow: hidden;
   margin: 0 auto;
   padding: clamp(48px, 6vw, 96px) var(--pad) clamp(36px, 4vw, 64px);
+}
+/* Content sits above the photo (a positioned photo would otherwise paint
+   over the static text). */
+.footer__inner > :not(picture) {
+  position: relative;
+}
+
+/* ---- Pelagonija aerial, the hero's counterpart, much dimmer ---- */
+.footer__photo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  opacity: 0.3;
+  filter: contrast(1.1) brightness(0.8);
+  /* Fade in from the left (under the headline) and out at top and bottom so
+     the photo has no hard edge against the hairlines. */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 55%),
+    linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 55%),
+    linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .footer__eyebrow {
@@ -180,7 +209,24 @@
   }
 }
 
+/* Above 1720px the content is capped at 1520px and centred, which left the
+   back-to-top arrow stranded at the content edge, well inside the screen.
+   Hold it at the 100px gutter it has at 1720px instead, so it stays at the
+   end of the row however wide the screen gets. */
+@media (min-width: 1720px) {
+  .footer__bottom .to-top {
+    margin-right: calc(100px - var(--pad));
+  }
+}
+
 @media (max-width: 720px) {
+  /* Under the stacked headline and links there is no clear space for it, and
+     faded enough to keep them legible it was invisible. Hidden, so the lazy
+     image is never downloaded. */
+  .footer__photo {
+    display: none;
+  }
+
   .footer__links {
     justify-content: flex-start;
     max-width: none;

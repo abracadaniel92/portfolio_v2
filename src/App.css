@@ -1,6 +1,5 @@
 /* ---- Shared section primitives ---- */
 .section {
-  max-width: 1600px;
   margin: 0 auto;
   padding: clamp(44px, 5vw, 80px) var(--pad);
 }

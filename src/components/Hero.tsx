@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import postOffice from "../assets/skopje-post-office.jpg";
 import Scramble from "./Scramble";
+import { PHONE, photoFallback, photoSrcset } from "../photos";
 import "./Hero.css";
 
 // `page: true` marks an entry that leaves this page for another route, rather
@@ -33,11 +33,20 @@ function Hero() {
 
   return (
     <section className="hero">
-      <img
-        className="hero__photo"
-        src={postOffice}
-        alt="The Central Post Office of Skopje, a brutalist concrete landmark by Janko Konstantinov"
-      />
+      <picture>
+        <source media={PHONE} type="image/avif" srcSet={photoSrcset("hero", "portrait", "avif")} sizes="100vw" />
+        <source media={PHONE} type="image/webp" srcSet={photoSrcset("hero", "portrait", "webp")} sizes="100vw" />
+        <source type="image/avif" srcSet={photoSrcset("hero", "landscape", "avif")} sizes="64vw" />
+        <img
+          className="hero__photo"
+          src={photoFallback("hero")}
+          srcSet={photoSrcset("hero", "landscape", "webp")}
+          sizes="64vw"
+          fetchPriority="high"
+          decoding="async"
+          alt="The Macedonian Opera and Ballet in Skopje: angular white concrete roofs above a wide flight of plaza steps"
+        />
+      </picture>
       <div className="hero__scrim" aria-hidden="true" />
 
       <span className="crop crop--tl" aria-hidden="true" />
@@ -119,7 +128,7 @@ function Hero() {
       </div>
 
       <footer className="baserail">
-        <span>Skopje 41.9981°N 21.4254°E</span>
+        <span>Skopje 41.9976°N 21.4371°E</span>
         <span className="baserail__cue">↓ built on concrete</span>
       </footer>
 

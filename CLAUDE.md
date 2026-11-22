@@ -90,6 +90,22 @@ drive that.
   keep both behaviors if you touch it.
 - Favicons: edit `public/favicon.svg`, then `node scripts/gen-favicons.mjs`.
   Never hand-edit the PNG/ICO outputs.
+- Photos: `node scripts/gen-photos.mjs <source> --set=hero|footer [options]`
+  writes grayscale AVIF/WebP variants to `src/assets/<set>/` (a landscape
+  series for desktop, a portrait crop for phones). The exact command for each
+  current photo is in the script's header. `src/photos.ts` globs those folders
+  into `srcset`s, so keep the `<shape>-<width>.<ext>` names. Sources are not
+  committed; only the outputs are.
+  - **hero**: the Macedonian Opera and Ballet, seen from the ground. If you
+    change it, also change the alt text and the coordinates in the hero's base
+    rail (they point at the building pictured).
+  - **footer**: an aerial of Studentski dom Pelagonija behind the contact
+    section, the hero's counterpart from above. Decorative (empty alt),
+    lazy-loaded, about 30% visible, and `display: none` on phones so it is
+    never downloaded there; hence `--desktop-only`.
+- **The back-to-top arrow holds a 100px gutter above 1720px** (`Footer.css`,
+  `ScrollTop.css`). The content cap would otherwise strand it at the content
+  edge, well inside a wide screen.
 
 ## Skills available
 

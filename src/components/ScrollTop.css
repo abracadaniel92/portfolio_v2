@@ -5,6 +5,12 @@
   padding: 16px var(--pad) 24px;
   border-top: 1px solid var(--hairline);
 }
+/* Same wide-screen gutter as the footer's arrow (see Footer.css). */
+@media (min-width: 1720px) {
+  .to-top-row {
+    padding-right: 100px;
+  }
+}
 
 .to-top {
   display: inline-flex;

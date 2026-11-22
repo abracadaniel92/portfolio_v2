@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { photoFallback, photoSrcset } from "../photos";
 import ScrollTop from "./ScrollTop";
 import "./Footer.css";
 
@@ -28,6 +29,23 @@ function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="footer__inner">
+        {/* The hero shows a building from the ground; the page closes on one
+            from above. Decorative, so empty alt; lazy, so it costs nothing
+            until the reader scrolls near the end. Hidden on phones (see
+            Footer.css), where a hidden lazy image is never fetched. */}
+        <picture>
+          <source type="image/avif" srcSet={photoSrcset("footer", "landscape", "avif")} sizes="60vw" />
+          <img
+            className="footer__photo"
+            src={photoFallback("footer")}
+            srcSet={photoSrcset("footer", "landscape", "webp")}
+            sizes="60vw"
+            loading="lazy"
+            decoding="async"
+            alt=""
+          />
+        </picture>
+
         <p className="footer__eyebrow">
           <span className="footer__mark" aria-hidden="true" />
           <span>
