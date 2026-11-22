@@ -38,7 +38,7 @@ const distDir = resolve(root, "dist");
 const indexPath = resolve(distDir, "index.html");
 const serverEntry = resolve(distDir, "server/entry-server.js");
 
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`; // bump ?v= when the image changes: share caches key on the URL
 const OG_IMAGE_ALT = "Goce Mojsoski, product and delivery leader";
 const JOB_TITLE = "Product & Delivery Leader";
 const SOCIAL_PROFILES = [

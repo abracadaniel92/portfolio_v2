@@ -103,6 +103,12 @@ drive that.
     section, the hero's counterpart from above. Decorative (empty alt),
     lazy-loaded, about 30% visible, and `display: none` on phones so it is
     never downloaded there; hence `--desktop-only`.
+- **`public/og-image.png`** is a 1200×630 render of the hero: headless Chrome
+  (`--force-prefers-reduced-motion --window-size=1200,820`) against the dev
+  server, cropped below the topbar with the buttons and spine label painted
+  out. Redo it when the hero photo or copy changes, and bump the `?v=` on its
+  URL (`index.html` and `OG_IMAGE` in `scripts/prerender.mjs`): LinkedIn,
+  Slack and Facebook cache share images by URL.
 - **The back-to-top arrow holds a 100px gutter above 1720px** (`Footer.css`,
   `ScrollTop.css`). The content cap would otherwise strand it at the content
   edge, well inside a wide screen.
