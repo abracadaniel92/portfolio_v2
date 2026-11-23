@@ -99,10 +99,12 @@ drive that.
   - **hero**: the Macedonian Opera and Ballet, seen from the ground. If you
     change it, also change the alt text and the coordinates in the hero's base
     rail (they point at the building pictured).
-  - **footer**: an aerial of Studentski dom Pelagonija behind the contact
-    section, the hero's counterpart from above. Decorative (empty alt),
-    lazy-loaded, about 30% visible, and `display: none` on phones so it is
-    never downloaded there; hence `--desktop-only`.
+  - **footer**: the Opera's interior behind the contact section, so the page
+    opens outside the building and closes inside it. A landscape strip cut
+    from a portrait source (`--band`), anchored right so the lit wall and
+    stairs survive a narrow box. Decorative (empty alt), lazy-loaded, about
+    30% visible, and `display: none` on phones so it is never downloaded
+    there; hence `--desktop-only`.
 - **`public/og-image.png`** is a 1200×630 render of the hero: headless Chrome
   (`--force-prefers-reduced-motion --window-size=1200,820`) against the dev
   server, cropped below the topbar with the buttons and spine label painted

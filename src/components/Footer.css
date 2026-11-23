@@ -15,7 +15,7 @@
   position: relative;
 }
 
-/* ---- Pelagonija aerial, the hero's counterpart, much dimmer ---- */
+/* ---- The Opera's interior: the hero's building from inside, much dimmer ---- */
 .footer__photo {
   position: absolute;
   top: 0;
@@ -23,7 +23,9 @@
   width: 60%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
+  /* Anchor right: the lit wall and stairs are on the photo's right edge, and
+     a narrower box should crop the dark left, which fades out anyway. */
+  object-position: 100% 50%;
   opacity: 0.3;
   filter: contrast(1.1) brightness(0.8);
   /* Fade in from the left (under the headline) and out at top and bottom so

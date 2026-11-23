@@ -9,8 +9,9 @@
 // Current sets:
 //   hero:   the Macedonian Opera and Ballet, 2048px square
 //           node scripts/gen-photos.mjs MOB.jpg --set=hero --phone-focus=0.38 --keep-left=0.8
-//   footer: aerial of Studentski dom Pelagonija, 1824x2304 portrait
-//           node scripts/gen-photos.mjs Gemini_Generated_Image_3z8tma3z8tma3z8t.jpg --set=footer --rotate --desktop-only
+//   footer: the Opera's interior, 1792x2400 portrait, cut to a landscape strip
+//           (angled soffit, lit wall and stairs; the banded ceiling is left out)
+//           node scripts/gen-photos.mjs mob-inside.jpg --set=footer --band=0.38,0.86 --desktop-only
 //           (desktop only: the footer hides the photo on phones)
 // Grayscale is baked in so the files carry one channel and compress smaller.
 // Outputs land in src/assets/<set>/ and are committed; the sources are not.
@@ -30,9 +31,13 @@ const focusArg = args.find((a) => a.startsWith("--phone-focus="));
 // side moves a left-of-centre subject out of the fade under the headline.
 const keepArg = args.find((a) => a.startsWith("--keep-left="));
 const KEEP = keepArg ? Number(keepArg.split("=")[1]) : 1;
+// Keep only a horizontal strip (top,bottom as 0–1) of the desktop image, for a
+// portrait source shown in a wide, short box.
+const bandArg = args.find((a) => a.startsWith("--band="));
+const [BAND_TOP, BAND_BOTTOM] = bandArg ? bandArg.split("=")[1].split(",").map(Number) : [0, 1];
 const set = args.find((a) => a.startsWith("--set="))?.split("=")[1];
 if (!src || !["hero", "footer"].includes(set)) {
-  console.error("usage: node scripts/gen-photos.mjs <source-image> --set=hero|footer [--rotate] [--phone-focus=0.6] [--keep-left=1] [--desktop-only]");
+  console.error("usage: node scripts/gen-photos.mjs <source-image> --set=hero|footer [--rotate] [--phone-focus=0.6] [--keep-left=1] [--band=0,1] [--desktop-only]");
   process.exit(1);
 }
 
@@ -46,17 +51,21 @@ const W = meta.width;
 const H = meta.height;
 const FOCUS_X = focusArg ? Number(focusArg.split("=")[1]) : 0.6;
 
-// Landscape: optional rotation, then an optional trim of the right side.
+// Landscape: optional rotation, then an optional trim of the right side and
+// an optional horizontal strip.
 const LW = rotate ? H : W;
 const LH = rotate ? W : H;
 const keepW = Math.round(LW * KEEP);
+const bandTop = Math.round(LH * BAND_TOP);
+const bandH = Math.round(LH * BAND_BOTTOM) - bandTop;
+const trimmed = KEEP < 1 || bandH < LH;
 const landscape = {
   name: "landscape",
   width: keepW,
   prep: (img) => {
     const r = rotate ? img.rotate(90) : img;
     // sharp runs an extract called after rotate on the rotated frame.
-    return KEEP < 1 ? r.extract({ left: 0, top: 0, width: keepW, height: LH }) : r;
+    return trimmed ? r.extract({ left: 0, top: bandTop, width: keepW, height: bandH }) : r;
   },
   targets: [1280, 1920, 2560],
 };
